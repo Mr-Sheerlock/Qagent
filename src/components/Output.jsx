@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, Button, Text, useToast } from "@chakra-ui/react";
 import { executeCode } from "../api";
+import "../styling/app.css";
 
 const Output = ({ editorRef, language }) => {
   const toast = useToast();
@@ -31,18 +32,27 @@ const Output = ({ editorRef, language }) => {
 
   return (
     <Box w="50%">
-      <Text mb={2} fontSize="lg">
-        Output
-      </Text>
-      <Button
-        variant="outline"
-        colorScheme="green"
-        mb={4}
-        isLoading={isLoading}
-        onClick={runCode}
-      >
-        Run Code
-      </Button>
+      <div className="buttons">
+        <div className="labelButtonWrapper">
+        <div className="label">
+          <Text mb={2} mt={2} fontSize="lg">
+            Output
+          </Text>
+        </div>
+        <div className="button">
+          <Button
+            variant="outline"
+            colorScheme="green"
+            ml={4}
+            mb={2}
+            isLoading={isLoading}
+            onClick={runCode}
+          >
+            Run Module
+          </Button>
+        </div>
+        </div>
+      </div>
       <Box
         height="75vh"
         p={2}

@@ -7,19 +7,16 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import { LANGUAGE_VERSIONS } from "../constants";
+import { LANGUAGE_VERSIONS } from "../constants.js";
 
 const languages = Object.entries(LANGUAGE_VERSIONS);
 const ACTIVE_COLOR = "blue.400";
 
-const LanguageSelector = ({ language, onSelect }) => {
+const LanguageSelector = ({ language, onSelect,isDisabledLanguage }) => {
   return (
-    <Box ml={2} mb={4}>
-      <Text mb={2} fontSize="lg">
-        Language:
-      </Text>
+    <Box ml={4} mb={2}>
       <Menu isLazy>
-        <MenuButton as={Button}>{language}</MenuButton>
+        <MenuButton as={Button} isDisabled={isDisabledLanguage} >{language}</MenuButton>
         <MenuList bg="#110c1b">
           {languages.map(([lang, version]) => (
             <MenuItem

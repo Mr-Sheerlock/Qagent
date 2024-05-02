@@ -1,0 +1,20 @@
+.iconHome{
+    height: 60px;
+    width: auto;
+    margin-bottom: 0.7em;
+}
+.buttons{
+    display: flex;
+}
+.labelButtonWrapper{
+    flex:0.5;
+    display: flex;
+    justify-content: left;
+}
+.button{
+    justify-content: center;
+}
+.label{
+    align-items: center;
+    justify-content: center;
+}
