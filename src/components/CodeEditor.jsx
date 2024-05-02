@@ -27,7 +27,7 @@ const CodeEditor = () => {
   const onSelectModule = (module) => {
     setModule(module);
     setValue(CODE_SNIPPETS[module]);
-    if ( module=== "Unit Tests Retriveal") {
+    if ( module=== "Unit Tests Retrival") {
       setIsDisabledLanguage(false);
     }
     else{

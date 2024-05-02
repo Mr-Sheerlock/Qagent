@@ -8,11 +8,11 @@ export const LANGUAGE_VERSIONS = {
 };
 
 export const MODULES = {
-  "Unit Tests Retriveal": "search for similar function",
+  "Unit Tests Retrival": "search for tests of similar function",
   "Generate Unit Tests": "generate unit tests for branch coverage",
   "Fix Bugs": "find bugs and fix them",
   "Find Vulnerabilities": "detect vulnerable lines",
-  "QAgent.AI": "AI based testing and more..",
+  "QAgent.AI": "AI based testing and bug fixing",
 };
 
 export const CODE_SNIPPETS = {
