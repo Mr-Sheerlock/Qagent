@@ -80,7 +80,7 @@ const CodeEditor = () => {
             onChange={(value) => setValue(value)}
           />
         </Box>
-        <Output editorRef={editorRef} language={language} />
+        <Output editorRef={editorRef} language={language} module={module}/>
       </HStack>
     </Box>
   );

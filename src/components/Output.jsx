@@ -2,21 +2,35 @@ import { useState } from "react";
 import { Box, Button, Text, useToast } from "@chakra-ui/react";
 import { executeCode } from "../api";
 import "../styling/app.css";
+import { handleClassicalModule, handleDBModule, handleFixBugsModule, handleVulnerabilitiesModule, handleQAgentAIModule } from "../handlers/modulehandlers";
 
-const Output = ({ editorRef, language }) => {
+const Output = ({ editorRef, language,module }) => {
   const toast = useToast();
   const [output, setOutput] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const runCode = async () => {
+  const runModule = async () => {
+    //set the output to null
+    setOutput(null);
     const sourceCode = editorRef.current.getValue();
     if (!sourceCode) return;
     try {
       setIsLoading(true);
-      const { run: result } = await executeCode(language, sourceCode);
-      setOutput(result.output.split("\n"));
-      result.stderr ? setIsError(true) : setIsError(false);
+      //if i have multiple requests 
+      if (module === "Generate Unit Tests") {
+        await handleClassicalModule(sourceCode, setIsError, setOutput, toast);
+      } else if (module === "Unit Tests Retrival") {
+        await handleDBModule(sourceCode, setIsError, setOutput, toast);
+      } else if (module === "Fix Bugs") {
+        await handleFixBugsModule(sourceCode, setIsError, setOutput, toast);
+      } else if (module === "Find Vulnerabilities") {
+        await handleVulnerabilitiesModule(sourceCode, setIsError, setOutput, toast);
+      } else if (module === "QAgent.AI") {
+        await handleQAgentAIModule(sourceCode, setIsError, setOutput, toast);
+      } else {
+        return;
+      }
     } catch (error) {
       console.log(error);
       toast({
@@ -46,7 +60,7 @@ const Output = ({ editorRef, language }) => {
             ml={4}
             mb={2}
             isLoading={isLoading}
-            onClick={runCode}
+            onClick={runModule}
           >
             Run Module
           </Button>
@@ -62,7 +76,7 @@ const Output = ({ editorRef, language }) => {
         borderColor={isError ? "red.500" : "#333"}
       >
         {output
-          ? output.map((line, i) => <Text key={i}>{line}</Text>)
+          ? output.map((line, i) => <Text key={i} style={{whiteSpace: "pre-wrap"}}>{line}</Text>)
           : 'Click "Run Code" to see the output here'}
       </Box>
     </Box>
