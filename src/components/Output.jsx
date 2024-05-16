@@ -4,17 +4,18 @@ import { executeCode } from "../api";
 import "../styling/app.css";
 import { handleClassicalModule, handleDBModule, handleFixBugsModule, handleVulnerabilitiesModule, handleQAgentAIModule } from "../handlers/modulehandlers";
 
-const Output = ({ editorRef, language,module }) => {
+const Output = ({ editorRef,description, language,module }) => {
   const toast = useToast();
   const [output, setOutput] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
+
   const runModule = async () => {
     //set the output to null
     setOutput(null);
     const sourceCode = editorRef.current.getValue();
-    if (!sourceCode) return;
+    if (!sourceCode || !description) return;
     try {
       setIsLoading(true);
       //if i have multiple requests 
@@ -27,7 +28,7 @@ const Output = ({ editorRef, language,module }) => {
       } else if (module === "Find Vulnerabilities") {
         await handleVulnerabilitiesModule(sourceCode, setIsError, setOutput, toast);
       } else if (module === "QAgent.AI") {
-        await handleQAgentAIModule(sourceCode, setIsError, setOutput, toast);
+        await handleQAgentAIModule(sourceCode,description, setIsError, setOutput, toast);
       } else {
         return;
       }
@@ -77,7 +78,7 @@ const Output = ({ editorRef, language,module }) => {
       >
         {output
           ? output.map((line, i) => <Text key={i} style={{whiteSpace: "pre-wrap"}}>{line}</Text>)
-          : 'Click "Run Code" to see the output here'}
+          : 'Click "Run Module" to see the output here'}
       </Box>
     </Box>
   );

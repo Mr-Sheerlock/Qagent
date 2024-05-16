@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Box, HStack, Text } from "@chakra-ui/react";
+import { Box, HStack, Text, Textarea } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import ModuleSelector from "./ModuleSelector";
@@ -12,6 +12,7 @@ const CodeEditor = () => {
   const [value, setValue] = useState("");
   const [language, setLanguage] = useState("python");
   const[module, setModule] = useState("Select Task");
+  const [description, setDescription] = useState("");
   const [isDisabledLanguage, setIsDisabledLanguage] = useState(true);
 
   const onMount = (editor) => {
@@ -71,7 +72,7 @@ const CodeEditor = () => {
                 enabled: false,
               },
             }}
-            height="75vh"
+            height={module === "QAgent.AI" ? "45vh" : "75vh"}
             theme="vs-dark"
             language={language}
             defaultValue={CODE_SNIPPETS[language]}
@@ -79,8 +80,16 @@ const CodeEditor = () => {
             value={value}
             onChange={(value) => setValue(value)}
           />
+          {module === "QAgent.AI" && 
+          <Textarea
+            height="27vh"
+            marginTop="3vh"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+            placeholder="Enter description"
+          />}
         </Box>
-        <Output editorRef={editorRef} language={language} module={module}/>
+        <Output editorRef={editorRef} description={description} language={language} module={module}/>
       </HStack>
     </Box>
   );
