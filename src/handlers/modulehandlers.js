@@ -44,10 +44,10 @@ export async function handleDBModule(sourceCode, setIsError, setUnitTestOutput, 
     }
     const data = await response.json();
     console.log(data);
-    if (data.output[1]!=="") {
+    if (data.codes.length==0) {
       setIsError(true);
-      setUnitTestOutput(data.output[1].trim().split("\n"));
-      console.log(data.output[1].trim().split("\n"));
+      setUnitTestOutput("An Error Occured in Retrieving Data");
+      console.log(data);
       toast({
         title: "An error occurred.",
         description: "Unable to run module",
@@ -57,7 +57,7 @@ export async function handleDBModule(sourceCode, setIsError, setUnitTestOutput, 
     }
     else {
       setIsError(false);
-      setUnitTestOutput(data.output[0].trim().split("\n"));
+      setUnitTestOutput(data.codes.join("\n") + "\n" + data.tests.join("\n"));
     }
 }
 export async function handleFixBugsModule(sourceCode, setIsError, setUnitTestOutput, toast) {
