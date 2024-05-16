@@ -27,16 +27,16 @@ const Output = ({ editorRef,description, language,module }) => {
     //output is waiting for the response from the server
     if (llmOutput!==""){
       if (outputType === "Test Generation") {
-        //setUnitTestOutput(data.output[0]);
-        setUnitTestOutput("Joseph");
+        setUnitTestOutput(llmOutput[0]);
+        // setUnitTestOutput("Joseph");
       }
       else if (outputType === "Decision") {
-        //setUnitTestOutput(data.decision);
-        setUnitTestOutput("Omar");
+        setUnitTestOutput(llmOutput[1]);
+        // setUnitTestOutput("Omar");
       }
       else if (outputType === "Bug Fix") {
-        //setUnitTestOutput(data.bug_fix);
-        setUnitTestOutput("karim");
+        setUnitTestOutput(llmOutput[2]);
+        // setUnitTestOutput("karim");
       }
     }
     else{
