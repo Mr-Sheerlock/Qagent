@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Box, Button, Text, useToast } from "@chakra-ui/react";
 import { executeCode } from "../api";
+import { Editor } from "@monaco-editor/react";
 import "../styling/app.css";
+import OutputSelector from "./OutputSelector";
 import { handleClassicalModule, handleDBModule, handleFixBugsModule, handleVulnerabilitiesModule, handleQAgentAIModule } from "../handlers/modulehandlers";
 
 const Output = ({ editorRef,description, language,module }) => {
@@ -9,26 +11,76 @@ const Output = ({ editorRef,description, language,module }) => {
   const [output, setOutput] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [outputType, setOutputType] = useState("Test Generation");
+  const [isDisabledOutputType, setIsDisabledOutputType] = useState(true);
+  const [llmOutput, setLlmOutput] = useState("");
 
+  const unitTestEditorRef = useRef();
+  const [UnitTestOutput, setUnitTestOutput] = useState("");
+  const onMount = (unitTestEditor) => {
+    unitTestEditorRef.current = unitTestEditor;
+    unitTestEditor.focus();
+  };
+
+  const onSelectOutputType = (outputType) => {
+    setOutputType(outputType);
+    //output is waiting for the response from the server
+    if (llmOutput!==""){
+      if (outputType === "Test Generation") {
+        //setUnitTestOutput(data.output[0]);
+        setUnitTestOutput("Joseph");
+      }
+      else if (outputType === "Decision") {
+        //setUnitTestOutput(data.decision);
+        setUnitTestOutput("Omar");
+      }
+      else if (outputType === "Bug Fix") {
+        //setUnitTestOutput(data.bug_fix);
+        setUnitTestOutput("karim");
+      }
+    }
+    else{
+      setIsDisabledOutputType(true);
+    }
+  }
 
   const runModule = async () => {
     //set the output to null
-    setOutput(null);
+    setUnitTestOutput(null);
+    //disable the output type
+    setIsDisabledOutputType(true);
+    // setOutput(null);
     const sourceCode = editorRef.current.getValue();
-    if (!sourceCode || !description) return;
+    if (!sourceCode ){ 
+      toast({
+        title: "Please enter your code!",
+        status: "error",
+        duration: 6000,
+      });  
+      return
+    };
+    if (module === "QAgent.AI" && !description){
+      toast({
+        title: "Please enter the description!",
+        status: "error",
+        duration: 6000,
+      });  
+      return
+    };
     try {
       setIsLoading(true);
       //if i have multiple requests 
       if (module === "Generate Unit Tests") {
-        await handleClassicalModule(sourceCode, setIsError, setOutput, toast);
+        await handleClassicalModule(sourceCode, setIsError, setUnitTestOutput, toast);
       } else if (module === "Unit Tests Retrival") {
-        await handleDBModule(sourceCode, setIsError, setOutput, toast);
+        await handleDBModule(sourceCode, setIsError, setUnitTestOutput, toast);
       } else if (module === "Fix Bugs") {
-        await handleFixBugsModule(sourceCode, setIsError, setOutput, toast);
+        await handleFixBugsModule(sourceCode, setIsError, setUnitTestOutput, toast);
       } else if (module === "Find Vulnerabilities") {
-        await handleVulnerabilitiesModule(sourceCode, setIsError, setOutput, toast);
+        await handleVulnerabilitiesModule(sourceCode, setIsError, setUnitTestOutput, toast);
       } else if (module === "QAgent.AI") {
-        await handleQAgentAIModule(sourceCode,description, setIsError, setOutput, toast);
+        await handleQAgentAIModule(sourceCode,description, setIsError, setUnitTestOutput, toast, setLlmOutput,setIsDisabledOutputType);
+        
       } else {
         return;
       }
@@ -49,12 +101,12 @@ const Output = ({ editorRef,description, language,module }) => {
     <Box w="50%">
       <div className="buttons">
         <div className="labelButtonWrapper">
-        <div className="label">
-          <Text mb={2} mt={2} fontSize="lg">
-            Output
-          </Text>
-        </div>
-        <div className="button">
+          <div className="label">
+            <Text mb={2} mt={2} fontSize="lg">
+              Output
+            </Text>
+          </div>
+          <div className="button">
           <Button
             variant="outline"
             colorScheme="green"
@@ -66,9 +118,29 @@ const Output = ({ editorRef,description, language,module }) => {
             Run Module
           </Button>
         </div>
+          {module === "QAgent.AI" && <div className="button">
+            <OutputSelector outputType={outputType} onSelectOutputType={onSelectOutputType} isDisabledOutputType={isDisabledOutputType} />
+          </div>}
         </div>
       </div>
-      <Box
+      
+      <Editor
+          options={{
+            minimap: {
+              enabled: false,
+            },
+          }}
+          height= "75vh"
+          theme="vs-dark"
+          language={language}
+          onMount={onMount}
+          value={UnitTestOutput}
+          onChange={(UnitTestOutput) => setUnitTestOutput(UnitTestOutput)}
+        />
+        {/* {output
+          ? output.map((line, i) => <Text key={i} style={{whiteSpace: "pre-wrap"}}>{line}</Text>)
+          : 'Click "Run Module" to see the output here'} */}
+      {/* <Box
         height="75vh"
         p={2}
         color={isError ? "red.400" : ""}
@@ -76,10 +148,7 @@ const Output = ({ editorRef,description, language,module }) => {
         borderRadius={4}
         borderColor={isError ? "red.500" : "#333"}
       >
-        {output
-          ? output.map((line, i) => <Text key={i} style={{whiteSpace: "pre-wrap"}}>{line}</Text>)
-          : 'Click "Run Module" to see the output here'}
-      </Box>
+      </Box> */}
     </Box>
   );
 };

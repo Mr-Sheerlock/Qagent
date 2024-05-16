@@ -1,4 +1,4 @@
-export async function handleClassicalModule(sourceCode, setIsError, setOutput, toast) {
+export async function handleClassicalModule(sourceCode, setIsError, setUnitTestOutput, toast) {
     const response = await fetch('http://127.0.0.1:5000/run-classical', {
       method: 'POST',
       headers: {
@@ -15,7 +15,7 @@ export async function handleClassicalModule(sourceCode, setIsError, setOutput, t
     console.log(data);
     if (data.output[1]!=="") {
       setIsError(true);
-      setOutput(data.output[1].trim().split("\n"));
+      setUnitTestOutput(data.output[1].trim().split("\n"));
       console.log(data.output[1].trim().split("\n"));
       toast({
         title: "An error occurred.",
@@ -26,16 +26,19 @@ export async function handleClassicalModule(sourceCode, setIsError, setOutput, t
     }
     else {
       setIsError(false);
-      setOutput(data.output[0].trim().split("\n"));
+      setUnitTestOutput(data.output[0].trim().split("\n"));
     }
   }
-export async function handleDBModule(sourceCode, setIsError, setOutput, toast) {
+export async function handleDBModule(sourceCode, setIsError, setUnitTestOutput, toast) {
 }
-export async function handleFixBugsModule(sourceCode, setIsError, setOutput, toast) {
+export async function handleFixBugsModule(sourceCode, setIsError, setUnitTestOutput, toast) {
 }
-export async function handleVulnerabilitiesModule(sourceCode, setIsError, setOutput, toast) {
+export async function handleVulnerabilitiesModule(sourceCode, setIsError, setUnitTestOutput, toast) {
 }
-export async function handleQAgentAIModule(sourceCode,description, setIsError, setOutput, toast) {
+export async function handleQAgentAIModule(sourceCode,description, setIsError, setUnitTestOutput, toast, setLlmOutput,setIsDisabledOutputType) {
+  // setLlmOutput("yes");
+  // setUnitTestOutput("ana i show el unit tests")
+  // setIsDisabledOutputType(false);
   const response = await fetch('http://127.0.0.1:5000/run-qagentai', {
       method: 'POST',
       headers: {
@@ -53,7 +56,7 @@ export async function handleQAgentAIModule(sourceCode,description, setIsError, s
     console.log(data);
     if (data.output[1]!=="") {
       setIsError(true);
-      setOutput(data.output[1].trim().split("\n"));
+      setUnitTestOutput(data.output[1].trim().split("\n"));
       console.log(data.output[1].trim().split("\n"));
       toast({
         title: "An error occurred.",
@@ -64,6 +67,9 @@ export async function handleQAgentAIModule(sourceCode,description, setIsError, s
     }
     else {
       setIsError(false);
-      setOutput(data.output[0].trim().split("\n"));
+      //TODO: you must set here the unit tests
+     // setUnitTestOutput(data.output.nnn)//to show the unit tests when he finish
+      setLlmOutput(data.output);//to return the llm output
+      setIsDisabledOutputType(false);//to enable the output type
     }
 }

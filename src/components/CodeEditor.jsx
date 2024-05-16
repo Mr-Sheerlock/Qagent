@@ -3,7 +3,7 @@ import { Box, HStack, Text, Textarea } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import ModuleSelector from "./ModuleSelector";
-import { CODE_SNIPPETS } from "../constants.js";
+import { CODE_SNIPPETS,DESCRIPTION } from "../constants.js";
 import "../styling/app.css"
 import Output from "./Output";
 
@@ -12,7 +12,7 @@ const CodeEditor = () => {
   const [value, setValue] = useState("");
   const [language, setLanguage] = useState("python");
   const[module, setModule] = useState("Select Task");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(DESCRIPTION);
   const [isDisabledLanguage, setIsDisabledLanguage] = useState(true);
 
   const onMount = (editor) => {
@@ -85,6 +85,7 @@ const CodeEditor = () => {
             height="27vh"
             marginTop="3vh"
             value={description}
+            defaultValue={DESCRIPTION}
             onChange={(event) => setDescription(event.target.value)}
             placeholder="Enter description"
           />}
