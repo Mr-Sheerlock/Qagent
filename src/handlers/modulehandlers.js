@@ -51,10 +51,10 @@ export async function handleQAgentAIModule(sourceCode,description, setIsError, s
     }
     const data = await response.json();
     console.log(data);
-    if (data.output[1]!=="") {
+    if (data.output[0] === "") {
       setIsError(true);
-      setOutput(data.output[1].trim().split("\n"));
-      console.log(data.output[1].trim().split("\n"));
+      setOutput(data.output[0].trim().split("\n"));
+      console.log(data.output[0].trim().split("\n"));
       toast({
         title: "An error occurred.",
         description: "Unable to run module",
@@ -63,7 +63,9 @@ export async function handleQAgentAIModule(sourceCode,description, setIsError, s
       });
     }
     else {
-      setIsError(false);
-      setOutput(data.output[0].trim().split("\n"));
+        console.log('karim');
+        console.log(data.output);
+        setIsError(false);
+        setOutput(data.output.split("\n"));
     }
 }
