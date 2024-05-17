@@ -41,6 +41,13 @@ const Output = ({ editorRef,description, language,module }) => {
         setUnitTestOutput(llmOutput[2]);
         // setUnitTestOutput("karim");
       }
+    }
+    else{
+      setIsDisabledOutputType(true);
+    }
+  }
+  const OnSelectDBOutputType= (outputType) => {
+    setdbOutputType(outputType);
     console.log(DBOutput);
     if (DBOutput.length!==0){
       if (outputType === "Code Test Pair 1") {
@@ -60,11 +67,10 @@ const Output = ({ editorRef,description, language,module }) => {
         setUnitTestOutput(code+'\n'+test);
       }
       }
+      else{
+        setIsDisabledOutputType(true);
+      }
     }
-    else{
-      setIsDisabledOutputType(true);
-    }
-  }
 
   const runModule = async () => {
     //set the output to null
@@ -144,7 +150,7 @@ const Output = ({ editorRef,description, language,module }) => {
             <OutputSelector outputType={outputType} onSelectOutputType={onSelectOutputType} isDisabledOutputType={isDisabledOutputType} />
           </div>}
           {module === "Unit Tests Retrieval"  && <div className="button">
-            <CodeTestSelector outputType={dboutputType} onSelectOutputType={onSelectOutputType} isDisabledOutputType={isDisabledOutputType} />
+            <CodeTestSelector outputType={dboutputType} onSelectOutputType={OnSelectDBOutputType} isDisabledOutputType={isDisabledOutputType} />
           </div>}
         </div>
       </div>
