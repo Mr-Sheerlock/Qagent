@@ -11,7 +11,7 @@ const CodeEditor = () => {
   const editorRef = useRef();
   const [value, setValue] = useState("");
   const [language, setLanguage] = useState("python");
-  const[module, setModule] = useState("Select Task");
+  const[module, setModule] = useState("Unit Tests Retrieval");
   const [description, setDescription] = useState(DESCRIPTION);
   const [isDisabledLanguage, setIsDisabledLanguage] = useState(true);
 

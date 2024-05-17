@@ -61,7 +61,6 @@ export async function handleDBModule(sourceCode, setIsError, setUnitTestOutput, 
       setUnitTestOutput(data.codes[0] + "\n" + data.tests[0]["test 0"]+'\n'+ data.tests[0]["test 1"]+'\n'+ data.tests[0]["test 2"]);
       // loop on data and make it list of code test pairs 
       // like so {code: "code", test: "test"}
-      console.log("Hllo")
       const dataPairs = data.codes.map((code, index) => {
         return {code: code, tests: data.tests[index]};
       });
