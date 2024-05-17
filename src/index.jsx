@@ -11,3 +11,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </ChakraProvider>
   </React.StrictMode>
 );
+
+
+
+// # install dependencies
+
+// npm install
+
+// # start the dev server
+
+// npm run dev

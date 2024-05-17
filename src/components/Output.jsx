@@ -4,6 +4,7 @@ import { executeCode } from "../api";
 import { Editor } from "@monaco-editor/react";
 import "../styling/app.css";
 import OutputSelector from "./OutputSelector";
+import CodeTestSelector from "./CodeTestSelector";
 import { handleClassicalModule, handleDBModule, handleFixBugsModule, handleVulnerabilitiesModule, handleQAgentAIModule } from "../handlers/modulehandlers";
 
 const Output = ({ editorRef,description, language,module }) => {
@@ -12,8 +13,10 @@ const Output = ({ editorRef,description, language,module }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [outputType, setOutputType] = useState("Test Generation");
+  const [dboutputType, setdbOutputType] = useState("Code Test Pair 1");
   const [isDisabledOutputType, setIsDisabledOutputType] = useState(true);
   const [llmOutput, setLlmOutput] = useState("");
+  const [DBOutput, setDBOutput] = useState("");
 
   const unitTestEditorRef = useRef();
   const [UnitTestOutput, setUnitTestOutput] = useState("");
@@ -37,6 +40,25 @@ const Output = ({ editorRef,description, language,module }) => {
       else if (outputType === "Bug Fix") {
         setUnitTestOutput(llmOutput[2]);
         // setUnitTestOutput("karim");
+      }
+    console.log(DBOutput);
+    if (DBOutput.length!==0){
+      if (outputType === "Code Test Pair 1") {
+        console.log(DBOutput[0].tests["test 0"]);
+        let code= DBOutput[0].code;
+        let test= DBOutput[0].tests["test 0"]+'\n'+DBOutput[0].tests["test 1"]+'\n'+DBOutput[0].tests["test 2"];
+        setUnitTestOutput(code+'\n'+test);
+      }
+      else if (outputType === "Code Test Pair 2") {
+        let code= DBOutput[1].code;
+        let test= DBOutput[1].tests["test 0"]+'\n'+DBOutput[1].tests["test 1"]+'\n'+DBOutput[1].tests["test 2"];
+        setUnitTestOutput(code+'\n'+test);
+      }
+      else if (outputType === "Code Test Pair 3") {
+        let code= DBOutput[2].code;
+        let test= DBOutput[2].tests["test 0"]+'\n'+DBOutput[2].tests["test 1"]+'\n'+DBOutput[2].tests["test 2"];
+        setUnitTestOutput(code+'\n'+test);
+      }
       }
     }
     else{
@@ -72,8 +94,8 @@ const Output = ({ editorRef,description, language,module }) => {
       //if i have multiple requests 
       if (module === "Generate Unit Tests") {
         await handleClassicalModule(sourceCode, setIsError, setUnitTestOutput, toast);
-      } else if (module === "Unit Tests Retrival") {
-        await handleDBModule(sourceCode, setIsError, setUnitTestOutput, toast);
+      } else if (module === "Unit Tests Retrieval") {
+        await handleDBModule(sourceCode, setIsError, setUnitTestOutput, toast, setDBOutput,setIsDisabledOutputType);
       } else if (module === "Fix Bugs") {
         await handleFixBugsModule(sourceCode, setIsError, setUnitTestOutput, toast);
       } else if (module === "Find Vulnerabilities") {
@@ -118,8 +140,11 @@ const Output = ({ editorRef,description, language,module }) => {
             Run Module
           </Button>
         </div>
-          {module === "QAgent.AI" && <div className="button">
+          {module === "QAgent.AI"  && <div className="button">
             <OutputSelector outputType={outputType} onSelectOutputType={onSelectOutputType} isDisabledOutputType={isDisabledOutputType} />
+          </div>}
+          {module === "Unit Tests Retrieval"  && <div className="button">
+            <CodeTestSelector outputType={dboutputType} onSelectOutputType={onSelectOutputType} isDisabledOutputType={isDisabledOutputType} />
           </div>}
         </div>
       </div>

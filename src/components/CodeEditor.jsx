@@ -28,7 +28,7 @@ const CodeEditor = () => {
   const onSelectModule = (module) => {
     setModule(module);
     setValue(CODE_SNIPPETS[module]);
-    if ( module=== "Unit Tests Retrival") {
+    if ( module=== "Unit Tests Retrieval") {
       setIsDisabledLanguage(false);
     }
     else{
@@ -54,7 +54,7 @@ const CodeEditor = () => {
                 <ModuleSelector module={module} onSelectModule={onSelectModule} />
               </div>
             </div>
-            {/* {module === "Unit Tests Retriveal" &&  */}
+            {/* {module === "Unit Tests Retrieval" &&  */}
             <div className="labelButtonWrapper">
               <div className="label">
                 <Text mb={2} mt={2} fontSize="lg">

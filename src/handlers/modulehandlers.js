@@ -29,7 +29,7 @@ export async function handleClassicalModule(sourceCode, setIsError, setUnitTestO
       setUnitTestOutput(data.output[0].trim().split("\n"));
     }
   }
-export async function handleDBModule(sourceCode, setIsError, setUnitTestOutput, toast) {
+export async function handleDBModule(sourceCode, setIsError, setUnitTestOutput, toast,setDbOutput,setIsDisabledOutputType) {
   const response = await fetch('http://127.0.0.1:8080/query', {
       method: 'POST',
       headers: {
@@ -57,7 +57,16 @@ export async function handleDBModule(sourceCode, setIsError, setUnitTestOutput, 
     }
     else {
       setIsError(false);
-      setUnitTestOutput(data.codes.join("\n") + "\n" + data.tests.join("\n"));
+      // setUnitTestOutput(data.codes.join("\n") + "\n" + data.tests.join("\n"));
+      setUnitTestOutput(data.codes[0] + "\n" + data.tests[0]["test 0"]+'\n'+ data.tests[0]["test 1"]+'\n'+ data.tests[0]["test 2"]);
+      // loop on data and make it list of code test pairs 
+      // like so {code: "code", test: "test"}
+      console.log("Hllo")
+      const dataPairs = data.codes.map((code, index) => {
+        return {code: code, tests: data.tests[index]};
+      });
+      setDbOutput(dataPairs);//to return the llm output
+      setIsDisabledOutputType(false);//to enable the output type
     }
 }
 export async function handleFixBugsModule(sourceCode, setIsError, setUnitTestOutput, toast) {
@@ -99,7 +108,7 @@ export async function handleQAgentAIModule(sourceCode,description, setIsError, s
       //TODO: you must set here the unit tests
       console.log(data.output[0])
       setUnitTestOutput(data.output[0])//to show the unit tests when he finish
-      setLlmOutput(data.output);//to return the llm output
       setIsDisabledOutputType(false);//to enable the output type
+      setLlmOutput(data.output);//to return the llm output
     }
 }

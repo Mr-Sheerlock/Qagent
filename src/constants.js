@@ -1,14 +1,14 @@
 export const LANGUAGE_VERSIONS = {
   python: "3.10.0",
-  javascript: "18.15.0",
-  typescript: "5.0.3",
+  // javascript: "18.15.0",
+  // typescript: "5.0.3",
   java: "15.0.2",
-  csharp: "6.12.0",
+  // csharp: "6.12.0",
   php: "8.2.3",
 };
 
 export const MODULES = {
-  "Unit Tests Retrival": "search for tests of similar function",
+  "Unit Tests Retrieval": "search for tests of similar function",
   "Generate Unit Tests": "generate unit tests for branch coverage",
   // "Fix Bugs": "find bugs and fix them",
   // "Find Vulnerabilities": "detect vulnerable lines",
@@ -33,3 +33,9 @@ export const AIOUTPUTS = {
   "Bug Fix": "AI based testing and bug fixing",
 };
 
+
+export const RETREIVALOUTPUT = {
+  "Code Test Pair 1": "Retreived code test pair",
+  "Code Test Pair 2": "Retreived code test pair",
+  "Code Test Pair 3": "Retreived code test pair",
+};
