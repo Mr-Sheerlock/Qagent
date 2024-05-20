@@ -8,10 +8,10 @@ function App() {
     <Box minH="100vh" bg="#0f0a19" color="gray.500" px={6} py={8}>
       <Box  display="flex">
         <img src="/qagentos.png" alt="Description of the image" className="iconHome" />
-        <Text mt={2} ml={4} fontSize='3xl' color="135D66">
+        <Text mt={2} ml={4} fontSize='3xl' style={{color:"#009999"}}>
         QA
         </Text>
-        <Text mt={2}  fontSize='3xl'>
+        <Text mt={2}  fontSize='3xl' style={{color:"white"}}>
         gent
         </Text>
         <Text mt={7} ml={8}  fontSize='xs' >

@@ -5,11 +5,11 @@ import { Editor } from "@monaco-editor/react";
 import "../styling/app.css";
 import OutputSelector from "./OutputSelector";
 import CodeTestSelector from "./CodeTestSelector";
-import { handleClassicalModule, handleDBModule, handleFixBugsModule, handleVulnerabilitiesModule, handleQAgentAIModule } from "../handlers/modulehandlers";
+import VulnerabilitiesOutput from "./VulnerabilitiesOutput";
+import { handleClassicalModule, handleDBModule, handleFixBugsModule, handleQAgentAIModule } from "../handlers/modulehandlers";
 
 const Output = ({ editorRef,description, language,module }) => {
   const toast = useToast();
-  const [output, setOutput] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [outputType, setOutputType] = useState("Test Generation");
@@ -31,15 +31,12 @@ const Output = ({ editorRef,description, language,module }) => {
     if (llmOutput!==""){
       if (outputType === "Test Generation") {
         setUnitTestOutput(llmOutput[0]);
-        // setUnitTestOutput("Joseph");
       }
       else if (outputType === "Decision") {
         setUnitTestOutput(llmOutput[1]);
-        // setUnitTestOutput("Omar");
       }
       else if (outputType === "Bug Fix") {
         setUnitTestOutput(llmOutput[2]);
-        // setUnitTestOutput("karim");
       }
     }
     else{
@@ -66,11 +63,11 @@ const Output = ({ editorRef,description, language,module }) => {
         let test= DBOutput[2].tests["test 0"]+'\n'+DBOutput[2].tests["test 1"]+'\n'+DBOutput[2].tests["test 2"];
         setUnitTestOutput(code+'\n'+test);
       }
-      }
-      else{
-        setIsDisabledOutputType(true);
-      }
     }
+    else{
+      setIsDisabledOutputType(true);
+    }
+  }
 
   const runModule = async () => {
     //set the output to null
@@ -79,7 +76,7 @@ const Output = ({ editorRef,description, language,module }) => {
     setIsDisabledOutputType(true);
     // setOutput(null);
     const sourceCode = editorRef.current.getValue();
-    if (!sourceCode ){ 
+    if (!sourceCode || sourceCode.trim() === ""){ 
       toast({
         title: "Please enter your code!",
         status: "error",
@@ -101,14 +98,15 @@ const Output = ({ editorRef,description, language,module }) => {
       if (module === "Generate Unit Tests") {
         await handleClassicalModule(sourceCode, setIsError, setUnitTestOutput, toast);
       } else if (module === "Unit Tests Retrieval") {
+        // make the output type for the DB to be Code Test Pair 1
+        setdbOutputType("Code Test Pair 1");
         await handleDBModule(sourceCode, setIsError, setUnitTestOutput, toast, setDBOutput,setIsDisabledOutputType);
       } else if (module === "Fix Bugs") {
         await handleFixBugsModule(sourceCode, setIsError, setUnitTestOutput, toast);
-      } else if (module === "Find Vulnerabilities") {
-        await handleVulnerabilitiesModule(sourceCode, setIsError, setUnitTestOutput, toast);
       } else if (module === "QAgent.AI") {
+        // make the output type for the llm to be Test Generation
+        setOutputType("Test Generation");
         await handleQAgentAIModule(sourceCode,description, setIsError, setUnitTestOutput, toast, setLlmOutput,setIsDisabledOutputType);
-        
       } else {
         return;
       }
@@ -121,65 +119,59 @@ const Output = ({ editorRef,description, language,module }) => {
         duration: 6000,
       });
     } finally {
-      setIsLoading(false);
+      //check if the module is not vulnerabilities
+      if (module !== "Find Vulnerabilities"){
+        setIsLoading(false);
+      }
     }
   };
 
   return (
     <Box w="50%">
-      <div className="buttons">
-        <div className="labelButtonWrapper">
-          <div className="label">
-            <Text mb={2} mt={2} fontSize="lg">
-              Output
-            </Text>
+      {module !== "Find Vulnerabilities"  &&
+        <div className="buttons">
+          <div className="labelButtonWrapper">
+            <div className="label">
+              <Text mb={2} mt={2} fontSize="lg">
+                Output
+              </Text>
+            </div>
+            <div className="button">
+              <Button
+                variant="outline"
+                colorScheme="green"
+                ml={4}
+                mb={2}
+                isLoading={isLoading}
+                onClick={runModule}
+              >
+                Run Module
+              </Button>
+            </div>
+            {module === "QAgent.AI"  && <div className="button">
+                <OutputSelector outputType={outputType} onSelectOutputType={onSelectOutputType} isDisabledOutputType={isDisabledOutputType} />
+              </div>}
+            {module === "Unit Tests Retrieval"  && <div className="button">
+              <CodeTestSelector outputType={dboutputType} onSelectOutputType={OnSelectDBOutputType} isDisabledOutputType={isDisabledOutputType} />
+            </div>}
           </div>
-          <div className="button">
-          <Button
-            variant="outline"
-            colorScheme="green"
-            ml={4}
-            mb={2}
-            isLoading={isLoading}
-            onClick={runModule}
-          >
-            Run Module
-          </Button>
         </div>
-          {module === "QAgent.AI"  && <div className="button">
-            <OutputSelector outputType={outputType} onSelectOutputType={onSelectOutputType} isDisabledOutputType={isDisabledOutputType} />
-          </div>}
-          {module === "Unit Tests Retrieval"  && <div className="button">
-            <CodeTestSelector outputType={dboutputType} onSelectOutputType={OnSelectDBOutputType} isDisabledOutputType={isDisabledOutputType} />
-          </div>}
-        </div>
-      </div>
-      
-      <Editor
-          options={{
-            minimap: {
-              enabled: false,
-            },
-          }}
-          height= "75vh"
-          theme="vs-dark"
-          language={language}
-          onMount={onMount}
-          value={UnitTestOutput}
-          onChange={(UnitTestOutput) => setUnitTestOutput(UnitTestOutput)}
-        />
-        {/* {output
-          ? output.map((line, i) => <Text key={i} style={{whiteSpace: "pre-wrap"}}>{line}</Text>)
-          : 'Click "Run Module" to see the output here'} */}
-      {/* <Box
-        height="75vh"
-        p={2}
-        color={isError ? "red.400" : ""}
-        border="1px solid"
-        borderRadius={4}
-        borderColor={isError ? "red.500" : "#333"}
-      >
-      </Box> */}
+      }
+      {module !== "Find Vulnerabilities"  &&
+        <Editor
+            options={{
+              minimap: {
+                enabled: false,
+              },
+            }}
+            height= "75vh"
+            theme="vs-dark"
+            language={language}
+            onMount={onMount}
+            value={UnitTestOutput}
+            onChange={(UnitTestOutput) => setUnitTestOutput(UnitTestOutput)}
+          />}
+      {module==="Find Vulnerabilities" && <VulnerabilitiesOutput editorRef={editorRef} />}
     </Box>
   );
 };

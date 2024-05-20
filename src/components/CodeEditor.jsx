@@ -27,14 +27,14 @@ const CodeEditor = () => {
 
   const onSelectModule = (module) => {
     setModule(module);
-    setValue(CODE_SNIPPETS[module]);
+    // setValue(CODE_SNIPPETS[module]);
     if ( module=== "Unit Tests Retrieval") {
       setIsDisabledLanguage(false);
     }
     else{
       setIsDisabledLanguage(true);
       setLanguage("python");
-      setValue(CODE_SNIPPETS["python"]);
+      // setValue(CODE_SNIPPETS["python"]);
     }
   }
 

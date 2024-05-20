@@ -95,9 +95,12 @@ export async function handleFixBugsModule(
 export async function handleVulnerabilitiesModule(
   sourceCode,
   setIsError,
-  setUnitTestOutput,
+  setOutput,
+  setVulIndices,
+  setVulLevels,
   toast
 ) {
+  console.log("sourceCode", sourceCode);
   const response = await fetch("http://127.0.0.1:8080/vuldetect", {
     method: "POST",
     headers: {
@@ -114,12 +117,21 @@ export async function handleVulnerabilitiesModule(
   console.log(data);
   if (data.length == 0) {
     setIsError(false);
-    setUnitTestOutput("No vulnerabilities detected !");
+    setOutput(["No vulnerabilities detected !"]);
     console.log(data);
   } else {
     setIsError(false);
-    setUnitTestOutput(data[0]['line_number'] + " " + data[0]['vul_level']);
-    console.log(data);
+    const vuls_indices = [];
+    const vul_levels = [];
+    for (let i = 0; i < data.length; i++) {
+      vuls_indices.push(data[i]["line_number"]);
+      vul_levels.push(data[i]["vul_level"]);
+    }
+    setVulIndices(vuls_indices);
+    setVulLevels(vul_levels);
+    console.log(vuls_indices);
+    console.log(vul_levels);
+    setOutput(sourceCode.split("\n"));
   }
 }
 export async function handleQAgentAIModule(
