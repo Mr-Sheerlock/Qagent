@@ -36,6 +36,7 @@ export async function handleClassicalModule(
 export async function handleDBModule(
   sourceCode,
   setIsError,
+  setSimilarCodeOutput,
   setUnitTestOutput,
   toast,
   setDbOutput,
@@ -57,7 +58,8 @@ export async function handleDBModule(
   console.log(data);
   if (data.codes.length == 0) {
     setIsError(true);
-    setUnitTestOutput("An Error Occured in Retrieving Data");
+    setSimilarCodeOutput(["An Error Occured in Retrieving Data"]);
+    // setUnitTestOutput("An Error Occured in Retrieving Data");
     console.log(data);
     toast({
       title: "An error occurred.",
@@ -67,10 +69,9 @@ export async function handleDBModule(
     });
   } else {
     setIsError(false);
+    setSimilarCodeOutput(data.codes[0]);
     // setUnitTestOutput(data.codes.join("\n") + "\n" + data.tests.join("\n"));
     setUnitTestOutput(
-      data.codes[0] +
-        "\n" +
         data.tests[0]["test 0"] +
         "\n" +
         data.tests[0]["test 1"] +

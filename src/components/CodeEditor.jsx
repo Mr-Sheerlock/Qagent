@@ -81,14 +81,19 @@ const CodeEditor = () => {
             onChange={(value) => setValue(value)}
           />
           {module === "QAgent.AI" && 
+          <div>
+          <div className="label">
+                <Text mb={1} mt={1} fontSize="lg">
+                  Enter Description for your code here :
+                </Text>
+          </div>
           <Textarea
-            height="27vh"
-            marginTop="3vh"
+            height="25.3vh"
             value={description}
-            defaultValue={DESCRIPTION}
             onChange={(event) => setDescription(event.target.value)}
             placeholder="Enter description"
-          />}
+          />
+          </div>}
         </Box>
         <Output editorRef={editorRef} description={description} language={language} module={module}/>
       </HStack>
