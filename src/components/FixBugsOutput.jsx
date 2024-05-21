@@ -6,7 +6,7 @@ import "../styling/app.css";
 
 import { handleFixBugsModule } from "../handlers/modulehandlers";
 
-const FixBugsOutput = ({ editorRef,language }) => {
+const FixBugsOutput = ({ editorRef,language, functionName, testCasesInputs, testCasesOutputs }) => {
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [UnitTestOutput, setUnitTestOutput] = useState("");
@@ -22,7 +22,7 @@ const FixBugsOutput = ({ editorRef,language }) => {
     //set the output to null
     setUnitTestOutput(null);
     const sourceCode = editorRef.current.getValue();
-    if (!sourceCode || sourceCode.trim() === ""){ 
+    if (!sourceCode || sourceCode.trim() === "" ){ 
       toast({
         title: "Please enter your code!",
         status: "error",
@@ -30,9 +30,58 @@ const FixBugsOutput = ({ editorRef,language }) => {
       });  
       return
     };
+    if (!functionName || functionName.trim() === "" ){ 
+      toast({
+        title: "Please enter function name!",
+        status: "error",
+        duration: 6000,
+      });  
+      return
+    };
+    if (!testCasesInputs || testCasesInputs.trim() === "" ){ 
+      toast({
+        title: "Please enter test cases inputs!",
+        status: "error",
+        duration: 6000,
+      });  
+      return
+    };
+    if (!testCasesOutputs || testCasesOutputs.trim() === "" ){ 
+      toast({
+        title: "Please enter test cases outputs!",
+        status: "error",
+        duration: 6000,
+      });  
+      return
+    };
+    //check if the test cases inputs and outputs are of same lengths
+    let testCasesInputsList, testCasesOutputsList;
+    try {
+      //convert the test cases inputs and outputs to list of lists [[input1,input2,...],[]] and output [[output1,output2,...],[]]
+      testCasesInputsList = testCasesInputs.split(/\n{2,}/).map(testCase => testCase.split("\n"));
+      testCasesOutputsList = testCasesOutputs.split("\n\n").map(testCase => testCase.split("\n"));
+      if (testCasesInputsList.length !== testCasesOutputsList.length){
+        toast({
+          title: "Test cases inputs and outputs are not of same length!",
+          status: "error",
+          duration: 6000,
+        });  
+        return
+      }
+      console.log(testCasesInputsList);
+      console.log(testCasesOutputsList);
+    }catch (error) {
+      console.log(error);
+      toast({
+        title: "An error occurred.",
+        description: error.message || "Unable to run code",
+        status: "error",
+        duration: 6000,
+      });
+    }
     try {
       setIsLoading(true);
-      await handleFixBugsModule(sourceCode, setIsError, setUnitTestOutput, toast);
+      await handleFixBugsModule(sourceCode, functionName, testCasesInputsList, testCasesOutputsList, setIsError, setUnitTestOutput, toast);
       
     } catch (error) {
       console.log(error);

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Box, HStack, Text, Textarea } from "@chakra-ui/react";
+import { Box, HStack, Text, Textarea, Input } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import ModuleSelector from "./ModuleSelector";
@@ -14,6 +14,10 @@ const CodeEditor = () => {
   const[module, setModule] = useState("Unit Tests Retrieval");
   const [description, setDescription] = useState(DESCRIPTION);
   const [isDisabledLanguage, setIsDisabledLanguage] = useState(true);
+  // for Fix Bugs module
+  const [functionName, setFunctionName] = useState("");
+  const [testCasesInputs, settestCasesIntputs] = useState("");
+  const [testCasesOutputs, settestCasesOutputs] = useState("");
 
   const onMount = (editor) => {
     editorRef.current = editor;
@@ -72,7 +76,7 @@ const CodeEditor = () => {
                 enabled: false,
               },
             }}
-            height={module === "QAgent.AI" ? "45vh" : "75vh"}
+            height={module === "QAgent.AI" || module==="Fix Bugs" ? "40vh" : "75vh"}
             theme="vs-dark"
             language={language}
             defaultValue={CODE_SNIPPETS[language]}
@@ -88,14 +92,69 @@ const CodeEditor = () => {
                 </Text>
           </div>
           <Textarea
-            height="25.3vh"
+            height="30.3vh"
             value={description}
             onChange={(event) => setDescription(event.target.value)}
             placeholder="Enter description"
           />
           </div>}
+          {module === "Fix Bugs" && 
+          <div>
+          <div className="label">
+                <Text mb={1} mt={1} fontSize="lg">
+                  Function Name :
+                </Text>
+          </div>
+          <Input
+            height="4.3vh"
+            mb={1}
+            placeholder="Enter function name"
+            value={functionName}
+            onChange={(event) => setFunctionName(event.target.value)}
+          />
+          <div style={{display:"flex"}}>
+            <div style={{flex: 1}}>
+              <div className="label">
+                <Text mb={1} mt={1} fontSize="lg">
+                  Test Cases Inputs :
+                </Text>
+              </div>
+              <Textarea
+                height="20.6vh"
+                mr={1}
+                value={testCasesInputs}
+                onChange={(event) => settestCasesIntputs(event.target.value)}
+                placeholder="{argument value 1 for test case1}
+                {argument value 2 for testcase 1}
+                {other arguments values for test case1}
+                ===delimiter is new empty line===
+                {argument value 1 of testcase 2}
+                ..."
+              />
+            </div>
+            <div style={{flex: 1}}>
+              <div className="label">
+                <Text mb={1} mt={1} fontSize="lg">
+                  Test Cases Outputs :
+                </Text>
+              </div>
+              <Textarea
+                height="20.6vh"
+                ml={1}
+                value={testCasesOutputs}
+                onChange={(event) => settestCasesOutputs(event.target.value)}
+                placeholder="{return value 1 for test case1}
+                {return value 2 for testcase 1}
+                {other arguments values for test case1}
+                ===delimiter is new empty line===
+                {return value 1 of testcase 2}
+                ..."
+              />
+            </div>
+          </div>
+          </div>}
         </Box>
-        <Output editorRef={editorRef} description={description} language={language} module={module}/>
+        <Output editorRef={editorRef} description={description} language={language} module={module} functionName={functionName} testCasesInputs={testCasesInputs} testCasesOutputs={testCasesOutputs}/>
       </HStack>
     </Box>
   );

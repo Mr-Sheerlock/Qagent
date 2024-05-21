@@ -20,8 +20,8 @@ export async function handleClassicalModule(
   console.log(data);
   if (data.output[1] !== "") {
     setIsError(true);
-    setUnitTestOutput(data.output[1].trim().split("\n"));
-    console.log(data.output[1].trim().split("\n"));
+    setUnitTestOutput(data.output[1]);
+    console.log(data.output[1]);
     toast({
       title: "An error occurred.",
       description: "Unable to run module",
@@ -30,7 +30,7 @@ export async function handleClassicalModule(
     });
   } else {
     setIsError(false);
-    setUnitTestOutput(data.output[0].trim().split("\n"));
+    setUnitTestOutput(data.output[0]);
   }
 }
 export async function handleDBModule(
@@ -89,10 +89,45 @@ export async function handleDBModule(
 }
 export async function handleFixBugsModule(
   sourceCode,
+  functionName,
+  testCasesInputs,
+  testCasesOutputs,
   setIsError,
   setUnitTestOutput,
   toast
-) {}
+) {
+  const response = await fetch("http://127.0.0.1:5000/run-fixbugs", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      code: sourceCode,
+      function_name: functionName,
+      test_cases_inputs: testCasesInputs,
+      test_cases_outputs: testCasesOutputs,
+    }),
+  });
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+  console.log(data);
+  if (data.output === "") {
+    setIsError(true);
+    setUnitTestOutput(data.output);
+    console.log(data.output);
+    toast({
+      title: "An error occurred.",
+      description: "Unable to run module",
+      status: "error",
+      duration: 6000,
+    });
+  } else {
+    setIsError(false);
+    setUnitTestOutput(data.output);
+  }
+}
 export async function handleVulnerabilitiesModule(
   sourceCode,
   setIsError,
