@@ -63,17 +63,20 @@ const DBOutput = ({ editorRef,language }) => {
         console.log(dbOutput[0].tests["test 0"]);
         let code= dbOutput[0].code;
         let test= dbOutput[0].tests["test 0"]+'\n'+dbOutput[0].tests["test 1"]+'\n'+dbOutput[0].tests["test 2"];
-        setUnitTestOutput(code+'\n'+test);
+        setSimilarCodeOutput(code);
+        setUnitTestOutput(test);
       }
       else if (outputType === "Code Test Pair 2") {
         let code= dbOutput[1].code;
         let test= dbOutput[1].tests["test 0"]+'\n'+dbOutput[1].tests["test 1"]+'\n'+dbOutput[1].tests["test 2"];
-        setUnitTestOutput(code+'\n'+test);
+        setSimilarCodeOutput(code);
+        setUnitTestOutput(test);
       }
       else if (outputType === "Code Test Pair 3") {
         let code= dbOutput[2].code;
         let test= dbOutput[2].tests["test 0"]+'\n'+dbOutput[2].tests["test 1"]+'\n'+dbOutput[2].tests["test 2"];
-        setUnitTestOutput(code+'\n'+test);
+        setSimilarCodeOutput(code);
+        setUnitTestOutput(test);
       }
     }
     else{
@@ -122,7 +125,7 @@ const DBOutput = ({ editorRef,language }) => {
             theme="vs-dark"
             language={language}
             onMount={onMount}
-            value={UnitTestOutput}
+            value={SimilarCodeOutput}
             onChange={(SimilarCodeOutput) => setSimilarCodeOutput(SimilarCodeOutput)}
           />
           <div className="label">
