@@ -59,7 +59,7 @@ const FixBugsOutput = ({ editorRef,language, functionName, testCasesInputs, test
     try {
       //convert the test cases inputs and outputs to list of lists [[input1,input2,...],[]] and output [[output1,output2,...],[]]
       testCasesInputsList = testCasesInputs.split(/\n{2,}/).map(testCase => testCase.split("\n"));
-      testCasesOutputsList = testCasesOutputs.split("\n\n").map(testCase => testCase.split("\n"));
+      testCasesOutputsList = testCasesOutputs.split(/\n{2,}/).map(testCase => testCase.split("\n"));
       if (testCasesInputsList.length !== testCasesOutputsList.length){
         toast({
           title: "Test cases inputs and outputs are not of same length!",
