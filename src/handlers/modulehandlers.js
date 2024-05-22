@@ -4,7 +4,7 @@ export async function handleClassicalModule(
   setUnitTestOutput,
   toast
 ) {
-  const response = await fetch("http://127.0.0.1:5000/run-classical", {
+  const response = await fetch("http://127.0.0.1:8080/run-classical", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -96,7 +96,7 @@ export async function handleFixBugsModule(
   setUnitTestOutput,
   toast
 ) {
-  const response = await fetch("http://127.0.0.1:5000/run-fixbugs", {
+  const response = await fetch("http://127.0.0.1:8080/run-fixbugs", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
