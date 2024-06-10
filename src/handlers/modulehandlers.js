@@ -1,5 +1,6 @@
 
 var apiprefix='http://127.0.0.1:8080/'
+var apiprefix='http://20.70.138.137:80/'
 
 export async function handleClassicalModule(
   sourceCode,
@@ -85,12 +86,27 @@ export async function handleDBModule(
     setIsError(false);
     setSimilarCodeOutput(data.codes[0]);
     // setUnitTestOutput(data.codes.join("\n") + "\n" + data.tests.join("\n"));
+    var loopVar=Object.keys(data.tests[0]).length
+    if (loopVar>3){
+      
+      loopVar=3
+      }
+      // for loop on it to get the tests
+    let Tosend=""
+    console.log("lolgamed")
+    console.log(data.tests[0])
+    for (let i = 0; i < loopVar; i++) {
+    Tosend+=data.tests[0]["test "+i]
+    }
+    console.log("lolerxd")
+    console.log(Tosend)
     setUnitTestOutput(
-        data.tests[0]["test 0"] +
-        "\n" +
-        data.tests[0]["test 1"] +
-        "\n" +
-        data.tests[0]["test 2"]
+        // data.tests[0]["test 0"] +
+        // "\n" +
+        // data.tests[0]["test 1"] +
+        // "\n" +
+        // data.tests[0]["test 2"]
+        Tosend
     );
     // loop on data and make it list of code test pairs
     // like so {code: "code", test: "test"}

@@ -61,19 +61,46 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
       if (outputType === "Code Test Pair 1") {
         console.log(dbOutput[0].tests["test 0"]);
         let code= dbOutput[0].code;
-        let test= dbOutput[0].tests["test 0"]+'\n'+dbOutput[0].tests["test 1"]+'\n'+dbOutput[0].tests["test 2"];
+        // let test= dbOutput[0].tests["test 0"]+'\n'+dbOutput[0].tests["test 1"]+'\n'+dbOutput[0].tests["test 2"];
+        let testsLen=Object.keys(dbOutput[0].tests).length
+        if (testsLen>3){
+          testsLen=3
+        }
+        let test=""
+
+        for (let i = 0; i < testsLen; i++) {
+          test+=dbOutput[0].tests["test "+i]+'\n'
+        }
+
         setSimilarCodeOutput(code);
         setUnitTestOutput(test);
       }
       else if (outputType === "Code Test Pair 2") {
         let code= dbOutput[1].code;
-        let test= dbOutput[1].tests["test 0"]+'\n'+dbOutput[1].tests["test 1"]+'\n'+dbOutput[1].tests["test 2"];
+        // let test= dbOutput[1].tests["test 0"]+'\n'+dbOutput[1].tests["test 1"]+'\n'+dbOutput[1].tests["test 2"];
+        let testsLen=Object.keys(dbOutput[1].tests).length
+        if (testsLen>3){
+          testsLen=3
+        }
+        let test=""
+
+        for (let i = 0; i < testsLen; i++) {
+          test+=dbOutput[1].tests["test "+i]+'\n'
+        }
         setSimilarCodeOutput(code);
         setUnitTestOutput(test);
       }
       else if (outputType === "Code Test Pair 3") {
         let code= dbOutput[2].code;
-        let test= dbOutput[2].tests["test 0"]+'\n'+dbOutput[2].tests["test 1"]+'\n'+dbOutput[2].tests["test 2"];
+        // let test= dbOutput[2].tests["test 0"]+'\n'+dbOutput[2].tests["test 1"]+'\n'+dbOutput[2].tests["test 2"];
+        let testsLen=Object.keys(dbOutput[2].tests).length
+        if (testsLen>3){
+          testsLen=3
+        }
+        let test=""
+        for (let i = 0; i < testsLen; i++) {
+          test+=dbOutput[2].tests["test "+i]+'\n'
+        }
         setSimilarCodeOutput(code);
         setUnitTestOutput(test);
       }
