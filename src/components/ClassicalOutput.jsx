@@ -3,24 +3,48 @@ import { Box, Button, Text, useToast } from "@chakra-ui/react";
 import { executeCode } from "../api";
 import { Editor } from "@monaco-editor/react";
 import "../styling/app.css";
-
+import TestsCoverageSelector from "./TestsCoverageSelector";
 import {  handleClassicalModule } from "../handlers/modulehandlers";
 
 const ClassicalOutput = ({ editorRef,language }) => {
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [UnitTestOutput, setUnitTestOutput] = useState("");
+  const [moduleOutput, setModuleOutput] = useState("");
   const [isError, setIsError] = useState(false);
-  
+  const [outputType, setOutputType] = useState("Unit Tests");
+  const [isDisabledOutputType, setIsDisabledOutputType] = useState(true);
+  const [out, setOut] = useState("");
+
   const unitTestEditorRef = useRef();
   const onMount = (unitTestEditor) => {
     unitTestEditorRef.current = unitTestEditor;
     unitTestEditor.focus();
   };
 
+  const onSelectOutputType = (outputType) => {
+    setOutputType(outputType);
+    //output is waiting for the response from the server
+    if (moduleOutput!==""){
+      if (outputType === "Unit Tests") {
+        setUnitTestOutput(moduleOutput[0]);
+      }
+      else if (outputType === "Coverage Report") {
+        const newOut = `Branch Coverage: ${moduleOutput[2][0]}%\nStatement Coverage: ${moduleOutput[2][1]}%\nTime Consumed: ${moduleOutput[2][2]}`;
+        setOut(newOut);
+        setUnitTestOutput(newOut);
+      }
+    }
+    else{
+      setIsDisabledOutputType(true);
+    }
+  }
+
   const runModuleClassical = async () => {
     //set the output to null
     setUnitTestOutput(null);
+    //disable the output type
+    setIsDisabledOutputType(true);
     const sourceCode = editorRef.current.getValue();
     if (!sourceCode || sourceCode.trim() === ""){ 
       toast({
@@ -32,7 +56,9 @@ const ClassicalOutput = ({ editorRef,language }) => {
     };
     try {
       setIsLoading(true);
-      await handleClassicalModule(sourceCode, setIsError, setUnitTestOutput, toast);
+      // make the output type for the llm to be Test Generation
+      setOutputType("Unit Tests");
+      await handleClassicalModule(sourceCode, setIsError, setUnitTestOutput, toast, setModuleOutput,setIsDisabledOutputType);
       
     } catch (error) {
       console.log(error);
@@ -67,6 +93,9 @@ const ClassicalOutput = ({ editorRef,language }) => {
                     >
                         Run Module
                     </Button>
+                </div>
+                <div className="button">
+                    <TestsCoverageSelector outputType={outputType} onSelectOutputType={onSelectOutputType} isDisabledOutputType={isDisabledOutputType} />
                 </div>
             </div>
         </div>

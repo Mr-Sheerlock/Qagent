@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Box, HStack, Text, Textarea, Input } from "@chakra-ui/react";
+import { Box, HStack, Text, Textarea, Input,Slider, SliderTrack,SliderFilledTrack,Tooltip,SliderThumb } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import ModuleSelector from "./ModuleSelector";
@@ -18,6 +18,11 @@ const CodeEditor = () => {
   const [functionName, setFunctionName] = useState("");
   const [testCasesInputs, settestCasesIntputs] = useState("");
   const [testCasesOutputs, settestCasesOutputs] = useState("");
+  //for DB module
+  const [sliderValue, setSliderValue] = useState(80)
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [slider2Value, setSlider2Value] = useState(80)
+  const [show2Tooltip, setShow2Tooltip] = useState(false)
 
   const onMount = (editor) => {
     editorRef.current = editor;
@@ -58,7 +63,79 @@ const CodeEditor = () => {
                 <ModuleSelector module={module} onSelectModule={onSelectModule} />
               </div>
             </div>
-            {/* {module === "Unit Tests Retrieval" &&  */}
+            {module === "Unit Tests Retrieval" && 
+              <div className="sliderLabelWraper">
+              <div className="label">
+                <Text mb={2} mt={2} mr={2} fontSize="lg">
+                  Threshold 1
+                </Text>
+              </div>
+                <div className="slide">
+                <Slider
+                    id='slider'
+                    mt={4}
+                    defaultValue={80}
+                    min={0}
+                    max={100}
+                    colorScheme='teal'
+                    onChange={(v) => setSliderValue(v)}
+                    onMouseEnter={() => setShowTooltip(true)}
+                    onMouseLeave={() => setShowTooltip(false)}
+                  >
+                    <SliderTrack>
+                      <SliderFilledTrack />
+                    </SliderTrack>
+                    <Tooltip
+                      hasArrow
+                      bg='teal.500'
+                      color='white'
+                      placement='top'
+                      isOpen={showTooltip}
+                      label={`${sliderValue}%`}
+                    >
+                      <SliderThumb />
+                    </Tooltip>
+                  </Slider>
+                </div>
+                </div>}
+                {module === "Unit Tests Retrieval" && 
+              <div className="sliderLabelWraper">
+              <div className="label">
+                <Text mb={2} mt={2} mr={2} fontSize="lg">
+                  Threshold 2 
+                </Text>
+              </div>
+                <div className="slide">
+                <Slider
+                    id='slider'
+                    mt={4}
+                    defaultValue={80}
+                    min={0}
+                    max={100}
+                    colorScheme='teal'
+                    onChange={(v) => setSlider2Value(v)}
+                    onMouseEnter={() => setShow2Tooltip(true)}
+                    onMouseLeave={() => setShow2Tooltip(false)}
+                  >
+                    
+                    <SliderTrack>
+                      <SliderFilledTrack />
+                    </SliderTrack>
+                    <Tooltip
+                      hasArrow
+                      bg='teal.500'
+                      color='white'
+                      placement='top'
+                      isOpen={show2Tooltip}
+                      label={`${slider2Value}%`}
+                    >
+                      <SliderThumb />
+                    </Tooltip>
+                  </Slider>
+                </div>
+                </div>
+                
+            }
             <div className="labelButtonWrapper">
               <div className="label">
                 <Text mb={2} mt={2} fontSize="lg">
@@ -154,7 +231,17 @@ const CodeEditor = () => {
           </div>
           </div>}
         </Box>
-        <Output editorRef={editorRef} description={description} language={language} module={module} functionName={functionName} testCasesInputs={testCasesInputs} testCasesOutputs={testCasesOutputs}/>
+        <Output 
+          editorRef={editorRef} 
+          description={description} 
+          language={language} 
+          module={module} 
+          functionName={functionName} 
+          testCasesInputs={testCasesInputs} 
+          testCasesOutputs={testCasesOutputs} 
+          sliderValue={sliderValue} 
+          slider2Value={slider2Value} 
+        />
       </HStack>
     </Box>
   );

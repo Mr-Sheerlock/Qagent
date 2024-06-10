@@ -2,7 +2,11 @@ export async function handleClassicalModule(
   sourceCode,
   setIsError,
   setUnitTestOutput,
-  toast
+  toast,
+  setModuleOutput,
+  setIsDisabledOutputType,
+  thresholSameLang,
+  thresholDiffLang,
 ) {
   const response = await fetch("http://127.0.0.1:8080/run-classical", {
     method: "POST",
@@ -11,6 +15,10 @@ export async function handleClassicalModule(
     },
     body: JSON.stringify({
       code: sourceCode,
+      language:language,
+      thresholSameLang: thresholSameLang/100,
+      thresholDiffLang: thresholDiffLang/100,
+
     }),
   });
   if (!response.ok) {
@@ -30,7 +38,9 @@ export async function handleClassicalModule(
     });
   } else {
     setIsError(false);
-    setUnitTestOutput(data.output[0]);
+    setUnitTestOutput(data.output[0]); //to show the unit tests when he finish
+    setIsDisabledOutputType(false); //to enable the output type
+    setModuleOutput(data.output); //to return the llm output
   }
 }
 export async function handleDBModule(

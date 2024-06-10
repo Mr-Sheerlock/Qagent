@@ -9,10 +9,10 @@ import FixBugsOutput from "./FixBugsOutput";
 import VulnerabilitiesOutput from "./VulnerabilitiesOutput";
 import QagentAiOutput from "./QagentAiOutput";
 
-const Output = ({ editorRef,description, language,module, functionName, testCasesInputs, testCasesOutputs }) => {
+const Output = ({ editorRef,description, language,module, functionName, testCasesInputs, testCasesOutputs, sliderValue, slider2Value }) => {
   return (
     <Box w="50%">
-      {module==="Unit Tests Retrieval" && <DBOutput editorRef={editorRef} language={language}/>}
+      {module==="Unit Tests Retrieval" && <DBOutput editorRef={editorRef} language={language} threshold1={sliderValue} threshold2={slider2Value}/>}
       {module==="Generate Unit Tests" && <ClassicalOutput editorRef={editorRef} language={language}/>}
       {module==="Fix Bugs" && <FixBugsOutput editorRef={editorRef} language={language} functionName={functionName} testCasesInputs={testCasesInputs} testCasesOutputs={testCasesOutputs}/>}
       {module==="Find Vulnerabilities" && <VulnerabilitiesOutput editorRef={editorRef} />}

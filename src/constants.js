@@ -33,9 +33,13 @@ export const AIOUTPUTS = {
   "Bug Fix": "AI based testing and bug fixing",
 };
 
-
 export const RETREIVALOUTPUT = {
   "Code Test Pair 1": "Retreived code test pair",
   "Code Test Pair 2": "Retreived code test pair",
   "Code Test Pair 3": "Retreived code test pair",
+};
+
+export const CLASSICALOUTPUTS = {
+  "Unit Tests": "Generated Unit Tests",
+  "Coverage Report": "Coverage Percentage of Unit Tests",
 };

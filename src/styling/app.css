@@ -18,3 +18,16 @@
     align-items: center;
     justify-content: center;
 }
+
+.slide{
+    Width:25%;
+    justify-content:end;
+    align-items: center;
+    vertical-align: middle;
+    z-index: 0;
+}
+.sliderLabelWraper{
+    flex:0.5;
+    display: flex;
+    justify-content: center;
+}

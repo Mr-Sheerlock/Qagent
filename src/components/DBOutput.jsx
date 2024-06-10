@@ -5,8 +5,7 @@ import { Editor } from "@monaco-editor/react";
 import "../styling/app.css";
 import CodeTestSelector from "./CodeTestSelector";
 import {  handleDBModule } from "../handlers/modulehandlers";
-
-const DBOutput = ({ editorRef,language }) => {
+const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) => {
   const toast = useToast();
   const [SimilarCodeOutput, setSimilarCodeOutput] = useState("");
   const [UnitTestOutput, setUnitTestOutput] = useState("");
@@ -42,7 +41,7 @@ const DBOutput = ({ editorRef,language }) => {
         setIsLoading(true);
         // make the output type for the DB to be Code Test Pair 1
         setdbOutputType("Code Test Pair 1");
-        await handleDBModule(sourceCode, setIsError, setSimilarCodeOutput,setUnitTestOutput, toast, setdbOutput,setIsDisabledOutputType);
+        await handleDBModule(sourceCode, setIsError, setSimilarCodeOutput,setUnitTestOutput, toast, setdbOutput,setIsDisabledOutputType,language ,thresholSameLang, thresholDiffLang);
     } catch (error) {
       console.log(error);
       toast({
@@ -105,6 +104,7 @@ const DBOutput = ({ editorRef,language }) => {
                         Run Module
                     </Button>
                 </div>
+                
                 <div className="button">
                     <CodeTestSelector outputType={dboutputType} onSelectOutputType={OnSelectDBOutputType} isDisabledOutputType={isDisabledOutputType} />
                 </div>
