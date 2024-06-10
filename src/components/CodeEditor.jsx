@@ -67,7 +67,7 @@ const CodeEditor = () => {
               <div className="sliderLabelWraper">
               <div className="label">
                 <Text mb={2} mt={2} mr={2} fontSize="lg">
-                  Threshold 1
+                  Same Lang
                 </Text>
               </div>
                 <div className="slide">
@@ -102,7 +102,7 @@ const CodeEditor = () => {
               <div className="sliderLabelWraper">
               <div className="label">
                 <Text mb={2} mt={2} mr={2} fontSize="lg">
-                  Threshold 2 
+                  Different Lang 
                 </Text>
               </div>
                 <div className="slide">
