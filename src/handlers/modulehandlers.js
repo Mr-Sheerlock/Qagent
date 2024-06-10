@@ -1,3 +1,6 @@
+
+var apiprefix='http://127.0.0.1:8080/'
+
 export async function handleClassicalModule(
   sourceCode,
   setIsError,
@@ -5,19 +8,14 @@ export async function handleClassicalModule(
   toast,
   setModuleOutput,
   setIsDisabledOutputType,
-  thresholSameLang,
-  thresholDiffLang,
 ) {
-  const response = await fetch("http://127.0.0.1:8080/run-classical", {
+  const response = await fetch(apiprefix+"run-classical", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       code: sourceCode,
-      language:language,
-      thresholSameLang: thresholSameLang/100,
-      thresholDiffLang: thresholDiffLang/100,
 
     }),
   });
@@ -50,15 +48,21 @@ export async function handleDBModule(
   setUnitTestOutput,
   toast,
   setDbOutput,
-  setIsDisabledOutputType
+  setIsDisabledOutputType,
+  language,
+  thresholSameLang,
+  thresholDiffLang,
 ) {
-  const response = await fetch("http://127.0.0.1:8080/query", {
+  const response = await fetch(apiprefix+"query", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       code: sourceCode,
+      language:language,
+      thresholSameLang: thresholSameLang/100,
+      thresholdDiffLang: thresholDiffLang/100,
     }),
   });
   if (!response.ok) {
@@ -106,7 +110,7 @@ export async function handleFixBugsModule(
   setUnitTestOutput,
   toast
 ) {
-  const response = await fetch("http://127.0.0.1:8080/run-fixbugs", {
+  const response = await fetch(apiprefix+"run-fixbugs", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -147,7 +151,7 @@ export async function handleVulnerabilitiesModule(
   toast
 ) {
   console.log("sourceCode", sourceCode);
-  const response = await fetch("http://127.0.0.1:8080/vuldetect", {
+  const response = await fetch(apiprefix+"vuldetect", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -192,7 +196,7 @@ export async function handleQAgentAIModule(
   // setLlmOutput("yes");
   // setUnitTestOutput("ana i show el unit tests")
   // setIsDisabledOutputType(false);
-  const response = await fetch("http://127.0.0.1:8080/qagentai", {
+  const response = await fetch(apiprefix+"qagentai", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

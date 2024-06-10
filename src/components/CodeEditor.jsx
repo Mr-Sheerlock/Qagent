@@ -13,7 +13,7 @@ const CodeEditor = () => {
   const [language, setLanguage] = useState("python");
   const[module, setModule] = useState("Unit Tests Retrieval");
   const [description, setDescription] = useState(DESCRIPTION);
-  const [isDisabledLanguage, setIsDisabledLanguage] = useState(true);
+  const [isDisabledLanguage, setIsDisabledLanguage] = useState(false);
   // for Fix Bugs module
   const [functionName, setFunctionName] = useState("");
   const [testCasesInputs, settestCasesIntputs] = useState("");
@@ -23,6 +23,9 @@ const CodeEditor = () => {
   const [showTooltip, setShowTooltip] = useState(false)
   const [slider2Value, setSlider2Value] = useState(80)
   const [show2Tooltip, setShow2Tooltip] = useState(false)
+  
+
+
 
   const onMount = (editor) => {
     editorRef.current = editor;
