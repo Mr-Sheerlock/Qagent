@@ -1,7 +1,7 @@
 
 var apiprefix='http://20.70.138.137:80/'
-var apiprefix='http://127.0.0.1:8080/'
 var apiprefix='http://192.168.1.2:80/'
+var apiprefix='http://127.0.0.1:8080/'
 
 export async function handleClassicalModule(
   sourceCode,

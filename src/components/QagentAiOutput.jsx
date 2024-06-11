@@ -28,9 +28,9 @@ const QagentAiOutput = ({ editorRef,description,language }) => {
       if (outputType === "Test Generation") {
         setUnitTestOutput(llmOutput[0]);
       }
-      else if (outputType === "Decision") {
-        setUnitTestOutput(llmOutput[1]);
-      }
+      // else if (outputType === "Decision") {
+      //   setUnitTestOutput(llmOutput[1]);
+      // }
       else if (outputType === "Bug Fix") {
         setUnitTestOutput(llmOutput[2]);
       }
