@@ -1,6 +1,7 @@
 
-var apiprefix='http://127.0.0.1:8080/'
 var apiprefix='http://20.70.138.137:80/'
+var apiprefix='http://127.0.0.1:8080/'
+var apiprefix='http://192.168.1.2:80/'
 
 export async function handleClassicalModule(
   sourceCode,
@@ -72,20 +73,20 @@ export async function handleDBModule(
   const data = await response.json();
   console.log(data);
   if (data.codes.length == 0) {
-    setIsError(true);
-    setSimilarCodeOutput(["An Error Occured in Retrieving Data"]);
-    // setUnitTestOutput("An Error Occured in Retrieving Data");
-    console.log(data);
-    toast({
-      title: "An error occurred.",
-      description: "Unable to run module",
-      status: "error",
-      duration: 6000,
-    });
+    // setIsError(true);
+    console.log("lol")
+    setSimilarCodeOutput(["No Similar Data was found in the database"]);
+    setUnitTestOutput(["An Error Occured in Retrieving Data"]);
+    // console.log(data);
+    // toast({
+    //   title: "An error occurred.",
+    //   description: "Unable to run module",
+    //   status: "error",
+    //   duration: 6000,
+    // });
   } else {
     setIsError(false);
     setSimilarCodeOutput(data.codes[0]);
-    // setUnitTestOutput(data.codes.join("\n") + "\n" + data.tests.join("\n"));
     var loopVar=Object.keys(data.tests[0]).length
     if (loopVar>3){
       

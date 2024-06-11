@@ -56,9 +56,12 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
   };
   const OnSelectDBOutputType= (outputType) => {
     setdbOutputType(outputType);
+    
+    console.log("Select Type");
     console.log(dbOutput);
     if (dbOutput.length!==0){
       if (outputType === "Code Test Pair 1") {
+        
         console.log(dbOutput[0].tests["test 0"]);
         let code= dbOutput[0].code;
         // let test= dbOutput[0].tests["test 0"]+'\n'+dbOutput[0].tests["test 1"]+'\n'+dbOutput[0].tests["test 2"];
@@ -76,34 +79,47 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
         setUnitTestOutput(test);
       }
       else if (outputType === "Code Test Pair 2") {
-        let code= dbOutput[1].code;
-        // let test= dbOutput[1].tests["test 0"]+'\n'+dbOutput[1].tests["test 1"]+'\n'+dbOutput[1].tests["test 2"];
-        let testsLen=Object.keys(dbOutput[1].tests).length
-        if (testsLen>3){
-          testsLen=3
-        }
-        let test=""
+        
+        if (dbOutput[1] !== undefined){
+          // let test= dbOutput[1].tests["test 0"]+'\n'+dbOutput[1].tests["test 1"]+'\n'+dbOutput[1].tests["test 2"];
+          let code= dbOutput[1].code;
+          let testsLen=Object.keys(dbOutput[1].tests).length
+          if (testsLen>3){
+            testsLen=3
+          }
+          let test=""
 
-        for (let i = 0; i < testsLen; i++) {
-          test+=dbOutput[1].tests["test "+i]+'\n'
-        }
+          for (let i = 0; i < testsLen; i++) {
+            test+=dbOutput[1].tests["test "+i]+'\n'
+          }
         setSimilarCodeOutput(code);
         setUnitTestOutput(test);
+      }else{
+        setSimilarCodeOutput("No Output Found");
+        setUnitTestOutput("No Output Found");
+      } 
       }
       else if (outputType === "Code Test Pair 3") {
-        let code= dbOutput[2].code;
-        // let test= dbOutput[2].tests["test 0"]+'\n'+dbOutput[2].tests["test 1"]+'\n'+dbOutput[2].tests["test 2"];
-        let testsLen=Object.keys(dbOutput[2].tests).length
-        if (testsLen>3){
-          testsLen=3
+        if (dbOutput[2] !== undefined){
+          
+          let code= dbOutput[2].code;
+          // let test= dbOutput[2].tests["test 0"]+'\n'+dbOutput[2].tests["test 1"]+'\n'+dbOutput[2].tests["test 2"];
+          let testsLen=Object.keys(dbOutput[2].tests).length
+          if (testsLen>3){
+            testsLen=3
+          }
+          let test=""
+          for (let i = 0; i < testsLen; i++) {
+            test+=dbOutput[2].tests["test "+i]+'\n'
+          }
+          setSimilarCodeOutput(code);
+          setUnitTestOutput(test);
         }
-        let test=""
-        for (let i = 0; i < testsLen; i++) {
-          test+=dbOutput[2].tests["test "+i]+'\n'
+
+        }else{
+          setSimilarCodeOutput("No Output Found");
+          setUnitTestOutput("No Output Found");
         }
-        setSimilarCodeOutput(code);
-        setUnitTestOutput(test);
-      }
     }
     else{
       setIsDisabledOutputType(true);
