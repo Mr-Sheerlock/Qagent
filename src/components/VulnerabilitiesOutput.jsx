@@ -81,7 +81,7 @@ const VulnerabilitiesOutput = ({ editorRef }) => {
             ? output.map((line, i) =>
                 <div style={{display:"flex"}}>
                 <p style={{flex:0.04}}>{i+1}&nbsp;</p>
-                <Text key={i} style={{flex: 1, whiteSpace: "pre-wrap", backgroundColor: vulIndices.includes(i) ?( vulLevels[vulIndices.indexOf(i)]===1?'#FFA726':'#EF5350' ): 'transparent' , color: vulIndices.includes(i) && 'white'}}>
+                <Text key={i} style={{flex: 1, whiteSpace: "pre-wrap", backgroundColor: vulIndices.includes(i) ?( vulLevels[vulIndices.indexOf(i)]===1?'#EF5350':'#EF5350' ): 'transparent' , color: vulIndices.includes(i) && 'white'}}>
                     {line}
                 </Text>
                 </div>
