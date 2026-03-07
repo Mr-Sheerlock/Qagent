@@ -1,7 +1,24 @@
 .iconHome{
-    height: 60px;
+    height: 70px;
     width: auto;
     margin-bottom: 0.7em;
+    filter: drop-shadow(0 0 20px rgba(0, 153, 153, 0.5)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: float 3s ease-in-out infinite;
+}
+
+.iconHome:hover {
+    filter: drop-shadow(0 0 30px rgba(0, 204, 204, 0.8)) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+    transform: translateY(-4px) scale(1.05);
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
 }
 .buttons{
     display: flex;
