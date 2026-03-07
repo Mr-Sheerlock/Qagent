@@ -198,6 +198,7 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
                 </div>
             </div>
         </div>
+        <div className="labelButtonWrapper">
         <div className="label">
                 <Text 
                     mb={1} 
@@ -207,12 +208,16 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
                     bgGradient="linear(to-r, #06b6d4, #3b82f6)"
                     bgClip="text"
                     letterSpacing="wide"
-                    style={{
-                        textShadow: '0 0 15px rgba(6, 182, 212, 0.3)'
+                    color="transparent"
+                    sx={{
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        filter: 'drop-shadow(0 0 15px rgba(6, 182, 212, 0.3))'
                     }}
                 >
                   Similar Code
                 </Text>
+          </div>
           </div>
         <Editor
             options={{
@@ -227,21 +232,26 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
             value={SimilarCodeOutput}
             onChange={(SimilarCodeOutput) => setSimilarCodeOutput(SimilarCodeOutput)}
           />
+          <div className="labelButtonWrapper">
           <div className="label">
                 <Text 
                     mb={1} 
                     mt={1} 
                     fontSize="md"
                     fontWeight="700"
-                    bgGradient="linear(to-r, #fbbf24, #f59e0b)"
+                    bgGradient="linear(to-r, #006cfa, #0092be)"
                     bgClip="text"
                     letterSpacing="wide"
-                    style={{
-                        textShadow: '0 0 15px rgba(251, 191, 36, 0.3)'
+                    color="transparent"
+                    sx={{
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        filter: 'drop-shadow(0 0 15px rgba(251, 191, 36, 0.3))'
                     }}
                 >
                   Unit Tests
                 </Text>
+          </div>
           </div>
           <Editor
             options={{
