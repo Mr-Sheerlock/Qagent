@@ -1,8 +1,7 @@
-
-var apiprefix='http://192.168.1.2:80/'
-var apiprefix='http://127.0.0.1:8080/'
-var apiprefix='http://20.70.138.137:80/'
-var apiprefix='http://127.0.0.1:8080/'
+var apiprefix = "http://192.168.1.2:80/";
+var apiprefix = "http://127.0.0.1:8080/";
+var apiprefix = "http://20.70.138.137:80/";
+var apiprefix = "http://127.0.0.1:8080/";
 
 export async function handleClassicalModule(
   sourceCode,
@@ -12,14 +11,13 @@ export async function handleClassicalModule(
   setModuleOutput,
   setIsDisabledOutputType,
 ) {
-  const response = await fetch(apiprefix+"run-classical", {
+  const response = await fetch(apiprefix + "run-classical", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       code: sourceCode,
-
     }),
   });
   if (!response.ok) {
@@ -56,16 +54,16 @@ export async function handleDBModule(
   thresholSameLang,
   thresholDiffLang,
 ) {
-  const response = await fetch(apiprefix+"query", {
+  const response = await fetch(apiprefix + "query", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       code: sourceCode,
-      language:language,
-      thresholSameLang: thresholSameLang/100,
-      thresholdDiffLang: thresholDiffLang/100,
+      language: language,
+      thresholSameLang: thresholSameLang / 100,
+      thresholdDiffLang: thresholDiffLang / 100,
     }),
   });
   if (!response.ok) {
@@ -74,9 +72,9 @@ export async function handleDBModule(
   const data = await response.json();
   console.log("DATA is");
   console.log(data);
-  if ( "codes" in data && data.codes.length == 0) {
+  if ("codes" in data && data.codes.length == 0) {
     // setIsError(true);
-    console.log("lol")
+    console.log("lol");
     setSimilarCodeOutput(["No Similar Data was found in the database"]);
     setUnitTestOutput(["An Error Occured in Retrieving Data"]);
     // console.log(data);
@@ -89,27 +87,26 @@ export async function handleDBModule(
   } else {
     setIsError(false);
     setSimilarCodeOutput(data.codes[0]);
-    var loopVar=Object.keys(data.tests[0]).length
-    if (loopVar>3){
-      
-      loopVar=3
-      }
-      // for loop on it to get the tests
-    let Tosend=""
-    console.log("lolgamed")
-    console.log(data.tests[0])
-    for (let i = 0; i < loopVar; i++) {
-    Tosend+=data.tests[0]["test "+i]
+    var loopVar = Object.keys(data.tests[0]).length;
+    if (loopVar > 3) {
+      loopVar = 3;
     }
-    console.log("lolerxd")
-    console.log(Tosend)
+    // for loop on it to get the tests
+    let Tosend = "";
+    console.log("lolgamed");
+    console.log(data.tests[0]);
+    for (let i = 0; i < loopVar; i++) {
+      Tosend += data.tests[0]["test " + i];
+    }
+    console.log("lolerxd");
+    console.log(Tosend);
     setUnitTestOutput(
-        // data.tests[0]["test 0"] +
-        // "\n" +
-        // data.tests[0]["test 1"] +
-        // "\n" +
-        // data.tests[0]["test 2"]
-        Tosend
+      // data.tests[0]["test 0"] +
+      // "\n" +
+      // data.tests[0]["test 1"] +
+      // "\n" +
+      // data.tests[0]["test 2"]
+      Tosend,
     );
     // loop on data and make it list of code test pairs
     // like so {code: "code", test: "test"}
@@ -127,9 +124,9 @@ export async function handleFixBugsModule(
   testCasesOutputs,
   setIsError,
   setUnitTestOutput,
-  toast
+  toast,
 ) {
-  const response = await fetch(apiprefix+"run-fixbugs", {
+  const response = await fetch(apiprefixomar + "run-fixbugs", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -167,10 +164,10 @@ export async function handleVulnerabilitiesModule(
   setOutput,
   setVulIndices,
   setVulLevels,
-  toast
+  toast,
 ) {
   console.log("sourceCode", sourceCode);
-  const response = await fetch(apiprefix+"vuldetect", {
+  const response = await fetch(apiprefix + "vuldetect", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -210,12 +207,12 @@ export async function handleQAgentAIModule(
   setUnitTestOutput,
   toast,
   setLlmOutput,
-  setIsDisabledOutputType
+  setIsDisabledOutputType,
 ) {
   // setLlmOutput("yes");
   // setUnitTestOutput("ana i show el unit tests")
   // setIsDisabledOutputType(false);
-  const response = await fetch(apiprefix+"qagentai", {
+  const response = await fetch(apiprefix + "qagentai", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
