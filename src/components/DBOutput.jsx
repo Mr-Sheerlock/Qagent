@@ -131,8 +131,20 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
         <div className="buttons">
             <div className="labelButtonWrapper">
                 <div className="label">
-                    <Text mb={2} mt={2} fontSize="lg">
-                    Output
+                    <Text 
+                        mb={2} 
+                        mt={2} 
+                        fontSize="md" 
+                        fontWeight="800"
+                        bgGradient="linear(to-r, #00eeff, #ffffff)"
+                        bgClip="text"
+                        letterSpacing="wider"
+                        textTransform="uppercase"
+                        style={{
+                            textShadow: '0 0 20px rgba(255, 152, 0, 0.3)'
+                        }}
+                    >
+                        Output
                     </Text>
                 </div>
                 <div className="button">
@@ -187,8 +199,19 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
             </div>
         </div>
         <div className="label">
-                <Text mb={1} mt={1} fontSize="lg">
-                  Similar Code :
+                <Text 
+                    mb={1} 
+                    mt={1} 
+                    fontSize="md"
+                    fontWeight="700"
+                    bgGradient="linear(to-r, #06b6d4, #3b82f6)"
+                    bgClip="text"
+                    letterSpacing="wide"
+                    style={{
+                        textShadow: '0 0 15px rgba(6, 182, 212, 0.3)'
+                    }}
+                >
+                  Similar Code
                 </Text>
           </div>
         <Editor
@@ -205,8 +228,19 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
             onChange={(SimilarCodeOutput) => setSimilarCodeOutput(SimilarCodeOutput)}
           />
           <div className="label">
-                <Text mb={1} mt={1} fontSize="lg">
-                  Unit Tests :
+                <Text 
+                    mb={1} 
+                    mt={1} 
+                    fontSize="md"
+                    fontWeight="700"
+                    bgGradient="linear(to-r, #fbbf24, #f59e0b)"
+                    bgClip="text"
+                    letterSpacing="wide"
+                    style={{
+                        textShadow: '0 0 15px rgba(251, 191, 36, 0.3)'
+                    }}
+                >
+                  Unit Tests
                 </Text>
           </div>
           <Editor

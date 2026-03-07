@@ -50,8 +50,20 @@ const VulnerabilitiesOutput = ({ editorRef }) => {
         <div className="buttons">
             <div className="labelButtonWrapper">
                 <div className="label">
-                    <Text mb={2} mt={2} fontSize="lg">
-                    Output
+                    <Text 
+                        mb={2} 
+                        mt={2} 
+                        fontSize="md" 
+                        fontWeight="800"
+                        bgGradient="linear(to-r, #ff9800, #ff6b35)"
+                        bgClip="text"
+                        letterSpacing="wider"
+                        textTransform="uppercase"
+                        style={{
+                            textShadow: '0 0 20px rgba(255, 152, 0, 0.3)'
+                        }}
+                    >
+                        Output
                     </Text>
                 </div>
                 <div className="button">
