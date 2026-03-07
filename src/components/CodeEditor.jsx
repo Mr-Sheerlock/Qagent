@@ -58,7 +58,7 @@ const CodeEditor = () => {
           <div className="buttons">
             <div className="labelButtonWrapper">
               <div className="label">
-                <Text mb={2} mt={2} fontSize="sm" fontWeight="600" color="gray.300">
+                <Text mb={2} mt={2} fontSize="lg">
                   Task
                 </Text>
               </div>
@@ -69,8 +69,17 @@ const CodeEditor = () => {
             {module === "Unit Tests Retrieval" && 
               <div className="sliderLabelWraper">
               <div className="label">
-                <Text mb={2} mt={2} mr={2} fontSize="sm" fontWeight="600" color="gray.300">
-                  Same Lang
+                <Text 
+                  mb={2} 
+                  mt={2} 
+                  ml={5} 
+                  fontSize="sm" 
+                  fontWeight="700"
+                  bgGradient="linear(to-r, #008888, #00aaaa)"
+                  bgClip="text"
+                  letterSpacing="wide"
+                >
+                  Same Language
                 </Text>
               </div>
                 <div className="slide">
@@ -84,57 +93,59 @@ const CodeEditor = () => {
                     onMouseEnter={() => setShowTooltip(true)}
                     onMouseLeave={() => setShowTooltip(false)}
                   >
-                    <SliderTrack 
-                      bg="rgba(255, 255, 255, 0.1)" 
-                      h="6px" 
-                      borderRadius="full"
-                    >
+                    <SliderTrack height="6px" borderRadius="full" bg="rgba(255, 255, 255, 0.1)">
                       <SliderFilledTrack 
                         bgGradient="linear(to-r, #009999, #00cccc)" 
-                        boxShadow="0 0 15px rgba(0, 153, 153, 0.6)"
+                        boxShadow="0 0 10px rgba(0, 204, 204, 0.5)"
                       />
                     </SliderTrack>
                     <Tooltip
                       hasArrow
-                      bg="linear-gradient(135deg, #009999, #00cccc)"
-                      color="white"
-                      placement="top"
+                      bgGradient="linear(to-r, #009999, #00cccc)"
+                      color='white'
+                      fontWeight="bold"
+                      borderRadius="md"
+                      placement='top'
                       isOpen={showTooltip}
                       label={`${sliderValue}%`}
-                      borderRadius="8px"
-                      px={3}
-                      py={2}
-                      fontWeight="700"
-                      fontSize="sm"
-                      boxShadow="0 4px 12px rgba(0, 153, 153, 0.4)"
                     >
                       <SliderThumb 
-                        boxSize={6} 
+                        boxSize={6}
                         bg="white"
                         border="3px solid"
                         borderColor="#009999"
-                        boxShadow="0 0 0 4px rgba(0, 153, 153, 0.2), 0 4px 12px rgba(0, 153, 153, 0.5)"
+                        boxShadow="0 0 0 3px rgba(0, 153, 153, 0.2), 0 2px 8px rgba(0, 0, 0, 0.3)"
                         _hover={{
                           boxSize: 7,
-                          boxShadow: "0 0 0 6px rgba(0, 153, 153, 0.3), 0 6px 20px rgba(0, 153, 153, 0.7)",
+                          boxShadow: "0 0 0 4px rgba(0, 153, 153, 0.3), 0 4px 12px rgba(0, 0, 0, 0.4)"
                         }}
-                        transition="all 0.2s ease"
+                        transition="all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
                       />
                     </Tooltip>
                   </Slider>
                 </div>
                 </div>}
                 {module === "Unit Tests Retrieval" && 
-              <div className="sliderLabelWraper">
+              <div className="sliderLabelWraper" style={{marginRight: "40px"}}>
               <div className="label">
-                <Text mb={2} mt={2} mr={2} fontSize="sm" fontWeight="600" color="gray.300">
-                  Different Lang 
+                <Text 
+                  mb={2} 
+                  mt={2} 
+                  ml={5} 
+                  fontSize="sm" 
+                  fontWeight="700"
+                  bgGradient="linear(to-r, #008888, #00aaaa)"
+                  bgClip="text"
+                  letterSpacing="wide"
+                >
+                  Different Language
                 </Text>
               </div>
                 <div className="slide">
                 <Slider
-                    id='slider2'
+                    id='slider'
                     mt={4}
+                    mr={1}
                     defaultValue={80}
                     min={0}
                     max={100}
@@ -142,41 +153,33 @@ const CodeEditor = () => {
                     onMouseEnter={() => setShow2Tooltip(true)}
                     onMouseLeave={() => setShow2Tooltip(false)}
                   >
-                    <SliderTrack 
-                      bg="rgba(255, 255, 255, 0.1)" 
-                      h="6px" 
-                      borderRadius="full"
-                    >
+                    <SliderTrack height="6px" borderRadius="full" bg="rgba(255, 255, 255, 0.1)">
                       <SliderFilledTrack 
                         bgGradient="linear(to-r, #009999, #00cccc)" 
-                        boxShadow="0 0 15px rgba(0, 153, 153, 0.6)"
+                        boxShadow="0 0 10px rgba(0, 204, 204, 0.5)"
                       />
                     </SliderTrack>
                     <Tooltip
                       hasArrow
-                      bg="linear-gradient(135deg, #009999, #00cccc)"
-                      color="white"
-                      placement="top"
+                      bgGradient="linear(to-r, #009999, #00cccc)"
+                      color='white'
+                      fontWeight="bold"
+                      borderRadius="md"
+                      placement='top'
                       isOpen={show2Tooltip}
                       label={`${slider2Value}%`}
-                      borderRadius="8px"
-                      px={3}
-                      py={2}
-                      fontWeight="700"
-                      fontSize="sm"
-                      boxShadow="0 4px 12px rgba(0, 153, 153, 0.4)"
                     >
                       <SliderThumb 
-                        boxSize={6} 
+                        boxSize={6}
                         bg="white"
                         border="3px solid"
                         borderColor="#009999"
-                        boxShadow="0 0 0 4px rgba(0, 153, 153, 0.2), 0 4px 12px rgba(0, 153, 153, 0.5)"
+                        boxShadow="0 0 0 3px rgba(0, 153, 153, 0.2), 0 2px 8px rgba(0, 0, 0, 0.3)"
                         _hover={{
                           boxSize: 7,
-                          boxShadow: "0 0 0 6px rgba(0, 153, 153, 0.3), 0 6px 20px rgba(0, 153, 153, 0.7)",
+                          boxShadow: "0 0 0 4px rgba(0, 153, 153, 0.3), 0 4px 12px rgba(0, 0, 0, 0.4)"
                         }}
-                        transition="all 0.2s ease"
+                        transition="all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
                       />
                     </Tooltip>
                   </Slider>
@@ -186,7 +189,7 @@ const CodeEditor = () => {
             }
             <div className="labelButtonWrapper">
               <div className="label">
-                <Text mb={2} mt={2} fontSize="sm" fontWeight="600" color="gray.300">
+                <Text mb={2} mt={2} fontSize="lg">
                   Language
                 </Text>
               </div>
