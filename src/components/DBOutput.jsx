@@ -261,8 +261,8 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
             borderRadius="16px"
             overflow="hidden"
             border="2px solid"
-            borderColor="rgba(251, 191, 36, 0.3)"
-            boxShadow="0 4px 20px rgba(251, 191, 36, 0.15), 0 0 40px rgba(251, 191, 36, 0.05)"
+            borderColor="rgba(36, 251, 168, 0.3)"
+            boxShadow="0 4px 20px rgba(0, 87, 12, 0.15), 0 0 40px rgba(43, 251, 36, 0.05)"
           >
             <Editor
               options={{
