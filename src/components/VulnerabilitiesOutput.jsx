@@ -56,12 +56,45 @@ const VulnerabilitiesOutput = ({ editorRef }) => {
                 </div>
                 <div className="button">
                     <Button
-                        variant="outline"
-                        colorScheme="green"
                         ml={4}
                         mb={2}
                         isLoading={isLoading}
                         onClick={runModuleVul}
+                        bg="linear-gradient(135deg, #10b981, #059669)"
+                        color="white"
+                        fontWeight="700"
+                        fontSize="md"
+                        px={8}
+                        py={6}
+                        borderRadius="14px"
+                        border="2px solid"
+                        borderColor="rgba(16, 185, 129, 0.4)"
+                        boxShadow="0 4px 20px rgba(16, 185, 129, 0.3), 0 0 20px rgba(16, 185, 129, 0.1)"
+                        transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                        leftIcon={
+                            <Box 
+                                as="span" 
+                                fontSize="lg"
+                                transition="transform 0.3s ease"
+                                _groupHover={{transform: "translateX(2px)"}}
+                            >
+                                ▶
+                            </Box>
+                        }
+                        _hover={{
+                            bg: "linear-gradient(135deg, #34d399, #10b981)",
+                            transform: "translateY(-3px) scale(1.02)",
+                            boxShadow: "0 8px 30px rgba(16, 185, 129, 0.5), 0 0 40px rgba(16, 185, 129, 0.2)",
+                            borderColor: "rgba(52, 211, 153, 0.6)",
+                        }}
+                        _active={{
+                            transform: "translateY(-1px) scale(1)",
+                            boxShadow: "0 4px 15px rgba(16, 185, 129, 0.4)",
+                        }}
+                        _loading={{
+                            opacity: 0.8,
+                        }}
+                        role="group"
                     >
                         Run Module
                     </Button>

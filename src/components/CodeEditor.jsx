@@ -58,7 +58,7 @@ const CodeEditor = () => {
           <div className="buttons">
             <div className="labelButtonWrapper">
               <div className="label">
-                <Text mb={2} mt={2} fontSize="lg">
+                <Text mb={2} mt={2} fontSize="sm" fontWeight="600" color="gray.300">
                   Task
                 </Text>
               </div>
@@ -69,7 +69,7 @@ const CodeEditor = () => {
             {module === "Unit Tests Retrieval" && 
               <div className="sliderLabelWraper">
               <div className="label">
-                <Text mb={2} mt={2} mr={2} fontSize="lg">
+                <Text mb={2} mt={2} mr={2} fontSize="sm" fontWeight="600" color="gray.300">
                   Same Lang
                 </Text>
               </div>
@@ -80,23 +80,46 @@ const CodeEditor = () => {
                     defaultValue={80}
                     min={0}
                     max={100}
-                    colorScheme='teal'
                     onChange={(v) => setSliderValue(v)}
                     onMouseEnter={() => setShowTooltip(true)}
                     onMouseLeave={() => setShowTooltip(false)}
                   >
-                    <SliderTrack>
-                      <SliderFilledTrack />
+                    <SliderTrack 
+                      bg="rgba(255, 255, 255, 0.1)" 
+                      h="6px" 
+                      borderRadius="full"
+                    >
+                      <SliderFilledTrack 
+                        bgGradient="linear(to-r, #009999, #00cccc)" 
+                        boxShadow="0 0 15px rgba(0, 153, 153, 0.6)"
+                      />
                     </SliderTrack>
                     <Tooltip
                       hasArrow
-                      bg='teal.500'
-                      color='white'
-                      placement='top'
+                      bg="linear-gradient(135deg, #009999, #00cccc)"
+                      color="white"
+                      placement="top"
                       isOpen={showTooltip}
                       label={`${sliderValue}%`}
+                      borderRadius="8px"
+                      px={3}
+                      py={2}
+                      fontWeight="700"
+                      fontSize="sm"
+                      boxShadow="0 4px 12px rgba(0, 153, 153, 0.4)"
                     >
-                      <SliderThumb />
+                      <SliderThumb 
+                        boxSize={6} 
+                        bg="white"
+                        border="3px solid"
+                        borderColor="#009999"
+                        boxShadow="0 0 0 4px rgba(0, 153, 153, 0.2), 0 4px 12px rgba(0, 153, 153, 0.5)"
+                        _hover={{
+                          boxSize: 7,
+                          boxShadow: "0 0 0 6px rgba(0, 153, 153, 0.3), 0 6px 20px rgba(0, 153, 153, 0.7)",
+                        }}
+                        transition="all 0.2s ease"
+                      />
                     </Tooltip>
                   </Slider>
                 </div>
@@ -104,35 +127,57 @@ const CodeEditor = () => {
                 {module === "Unit Tests Retrieval" && 
               <div className="sliderLabelWraper">
               <div className="label">
-                <Text mb={2} mt={2} mr={2} fontSize="lg">
+                <Text mb={2} mt={2} mr={2} fontSize="sm" fontWeight="600" color="gray.300">
                   Different Lang 
                 </Text>
               </div>
                 <div className="slide">
                 <Slider
-                    id='slider'
+                    id='slider2'
                     mt={4}
                     defaultValue={80}
                     min={0}
                     max={100}
-                    colorScheme='teal'
                     onChange={(v) => setSlider2Value(v)}
                     onMouseEnter={() => setShow2Tooltip(true)}
                     onMouseLeave={() => setShow2Tooltip(false)}
                   >
-                    
-                    <SliderTrack>
-                      <SliderFilledTrack />
+                    <SliderTrack 
+                      bg="rgba(255, 255, 255, 0.1)" 
+                      h="6px" 
+                      borderRadius="full"
+                    >
+                      <SliderFilledTrack 
+                        bgGradient="linear(to-r, #009999, #00cccc)" 
+                        boxShadow="0 0 15px rgba(0, 153, 153, 0.6)"
+                      />
                     </SliderTrack>
                     <Tooltip
                       hasArrow
-                      bg='teal.500'
-                      color='white'
-                      placement='top'
+                      bg="linear-gradient(135deg, #009999, #00cccc)"
+                      color="white"
+                      placement="top"
                       isOpen={show2Tooltip}
                       label={`${slider2Value}%`}
+                      borderRadius="8px"
+                      px={3}
+                      py={2}
+                      fontWeight="700"
+                      fontSize="sm"
+                      boxShadow="0 4px 12px rgba(0, 153, 153, 0.4)"
                     >
-                      <SliderThumb />
+                      <SliderThumb 
+                        boxSize={6} 
+                        bg="white"
+                        border="3px solid"
+                        borderColor="#009999"
+                        boxShadow="0 0 0 4px rgba(0, 153, 153, 0.2), 0 4px 12px rgba(0, 153, 153, 0.5)"
+                        _hover={{
+                          boxSize: 7,
+                          boxShadow: "0 0 0 6px rgba(0, 153, 153, 0.3), 0 6px 20px rgba(0, 153, 153, 0.7)",
+                        }}
+                        transition="all 0.2s ease"
+                      />
                     </Tooltip>
                   </Slider>
                 </div>
@@ -141,7 +186,7 @@ const CodeEditor = () => {
             }
             <div className="labelButtonWrapper">
               <div className="label">
-                <Text mb={2} mt={2} fontSize="lg">
+                <Text mb={2} mt={2} fontSize="sm" fontWeight="600" color="gray.300">
                   Language
                 </Text>
               </div>

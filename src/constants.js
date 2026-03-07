@@ -10,8 +10,8 @@ export const LANGUAGE_VERSIONS = {
 export const MODULES = {
   "Unit Tests Retrieval": "search for tests of similar function",
   "Generate Unit Tests": "generate unit tests for branch coverage",
-  // "Fix Bugs": "find bugs and fix them",
-  // "Find Vulnerabilities": "detect vulnerable lines",
+  "Fix Bugs": "find bugs and fix them",
+  "Find Vulnerabilities": "detect vulnerable lines",
   "QAgent.AI": "AI based testing and bug fixing",
 };
 
