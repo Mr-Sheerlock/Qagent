@@ -25,7 +25,7 @@ export const CODE_SNIPPETS = {
   php: "<?php\n\n$name = 'Alex';\necho $name;\n",
 };
 
-export const DESCRIPTION = "This function adds two numbers together."
+export const DESCRIPTION = "This function adds two numbers together.";
 
 export const AIOUTPUTS = {
   "Test Generation": "search for tests of similar function",

@@ -1,6 +1,7 @@
 
-var apiprefix='http://20.70.138.137:80/'
 var apiprefix='http://192.168.1.2:80/'
+var apiprefix='http://127.0.0.1:8080/'
+var apiprefix='http://20.70.138.137:80/'
 var apiprefix='http://127.0.0.1:8080/'
 
 export async function handleClassicalModule(
@@ -71,8 +72,9 @@ export async function handleDBModule(
     throw new Error(`HTTP error! status: ${response.status}`);
   }
   const data = await response.json();
+  console.log("DATA is");
   console.log(data);
-  if (data.codes.length == 0) {
+  if ( "codes" in data && data.codes.length == 0) {
     // setIsError(true);
     console.log("lol")
     setSimilarCodeOutput(["No Similar Data was found in the database"]);
