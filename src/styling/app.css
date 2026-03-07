@@ -1,50 +1,193 @@
-.iconHome{
-    height: 70px;
-    width: auto;
-    margin-bottom: 0.7em;
-    filter: drop-shadow(0 0 20px rgba(0, 153, 153, 0.5)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: float 3s ease-in-out infinite;
-}
+/* Import modern font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-.iconHome:hover {
-    filter: drop-shadow(0 0 30px rgba(0, 204, 204, 0.8)) drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
-    transform: translateY(-4px) scale(1.05);
-}
-
+/* Global animations */
 @keyframes float {
     0%, 100% {
         transform: translateY(0px);
     }
     50% {
-        transform: translateY(-8px);
+        transform: translateY(-10px);
     }
 }
-.buttons{
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 200%;
+    }
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(0, 204, 204, 0.3), 0 0 40px rgba(0, 153, 153, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(0, 204, 204, 0.5), 0 0 60px rgba(0, 153, 153, 0.3);
+    }
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Animated gradient orbs */
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.gradient-orb-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 204, 204, 0.4), transparent);
+    top: -200px;
+    right: -200px;
+    animation: float 20s ease-in-out infinite;
+}
+
+.gradient-orb-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 153, 255, 0.3), transparent);
+    bottom: -150px;
+    left: -150px;
+    animation: float 15s ease-in-out infinite reverse;
+}
+
+.gradient-orb-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(102, 126, 234, 0.3), transparent);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: float 18s ease-in-out infinite;
+}
+
+/* Grid background pattern */
+.grid-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 204, 204, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 204, 204, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Icon */
+.iconHome {
+    height: 80px;
+    width: auto;
+    filter: drop-shadow(0 0 25px rgba(0, 204, 204, 0.6)) 
+            drop-shadow(0 4px 16px rgba(0, 0, 0, 0.5));
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: float 4s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.iconHome:hover {
+    filter: drop-shadow(0 0 40px rgba(0, 255, 255, 1)) 
+            drop-shadow(0 8px 24px rgba(0, 0, 0, 0.6));
+    transform: translateY(-6px) scale(1.08) rotate(5deg);
+}
+
+/* Layout */
+.buttons {
     display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: nowrap;
+    align-items: flex-start;
 }
-.labelButtonWrapper{
-    flex:0.5;
+
+.labelButtonWrapper {
+    flex: 1;
     display: flex;
-    justify-content: left;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 180px;
 }
-.button{
-    justify-content: center;
-}
-.label{
-    align-items: center;
+
+.button {
+    display: flex;
     justify-content: center;
 }
 
-.slide{
-    Width: 50%;
-    justify-content:end;
+.label {
+    display: flex;
     align-items: center;
-    vertical-align: middle;
+    justify-content: flex-start;
+}
+
+.slide {
+    width: 75%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     z-index: 0;
 }
-.sliderLabelWraper{
-    flex:0.5;
+
+.sliderLabelWraper {
+    flex: 0.5;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 200px;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #009999, #00cccc);
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #00cccc, #00ffff);
+}
+
+/* Smooth transitions for all interactive elements */
+button, input, textarea, select {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add subtle animation to text inputs */
+input:focus, textarea:focus {
+    animation: pulse-glow 2s ease-in-out infinite;
 }

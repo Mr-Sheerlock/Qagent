@@ -87,16 +87,15 @@ const QagentAiOutput = ({ editorRef,description,language }) => {
             <div className="labelButtonWrapper">
                 <div className="label">
                     <Text 
-                        mb={2} 
-                        mt={2} 
-                        fontSize="md" 
-                        fontWeight="800"
-                        bgGradient="linear(to-r, #ff9800, #ff6b35)"
+                        mb={1}
+                        fontSize="sm" 
+                        fontWeight="700"
+                        bgGradient="linear(135deg, #a78bfa, #8b5cf6)"
                         bgClip="text"
-                        letterSpacing="wider"
+                        letterSpacing="wide"
                         textTransform="uppercase"
                         style={{
-                            textShadow: '0 0 20px rgba(255, 152, 0, 0.3)'
+                            textShadow: '0 0 20px rgba(139, 92, 246, 0.3)'
                         }}
                     >
                         Output
