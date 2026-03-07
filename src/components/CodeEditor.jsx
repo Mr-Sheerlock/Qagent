@@ -214,20 +214,28 @@ const CodeEditor = () => {
               </div>
             </div>
           </div>
-          <Editor
-            options={{
-              minimap: {
-                enabled: false,
-              },
-            }}
-            height={module === "QAgent.AI" || module==="Fix Bugs" ? "40vh" : "75vh"}
-            theme="vs-dark"
-            language={language}
-            defaultValue={CODE_SNIPPETS[language]}
-            onMount={onMount}
-            value={value}
-            onChange={(value) => setValue(value)}
-          />
+          <Box
+            borderRadius="16px"
+            overflow="hidden"
+            border="2px solid"
+            borderColor="rgba(0, 153, 153, 0.3)"
+            boxShadow="0 4px 20px rgba(0, 153, 153, 0.15), 0 0 40px rgba(0, 153, 153, 0.05)"
+          >
+            <Editor
+              options={{
+                minimap: {
+                  enabled: false,
+                },
+              }}
+              height={module === "QAgent.AI" || module==="Fix Bugs" ? "40vh" : "75vh"}
+              theme="vs-dark"
+              language={language}
+              defaultValue={CODE_SNIPPETS[language]}
+              onMount={onMount}
+              value={value}
+              onChange={(value) => setValue(value)}
+            />
+          </Box>
           {module === "QAgent.AI" && 
           <div>
           <div className="label">
@@ -235,12 +243,22 @@ const CodeEditor = () => {
                   Enter Description for your code here :
                 </Text>
           </div>
-          <Textarea
-            height="30.3vh"
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-            placeholder="Enter description"
-          />
+          <Box
+            borderRadius="16px"
+            overflow="hidden"
+            border="2px solid"
+            borderColor="rgba(0, 153, 153, 0.3)"
+            boxShadow="0 4px 20px rgba(0, 153, 153, 0.15), 0 0 40px rgba(0, 153, 153, 0.05)"
+          >
+            <Textarea
+              height="30.3vh"
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
+              placeholder="Enter description"
+              border="none"
+              _focus={{ border: "none", boxShadow: "none" }}
+            />
+          </Box>
           </div>}
           {module === "Fix Bugs" && 
           <div>
@@ -249,13 +267,23 @@ const CodeEditor = () => {
                   Function Name :
                 </Text>
           </div>
-          <Input
-            height="4.3vh"
+          <Box
+            borderRadius="12px"
+            overflow="hidden"
+            border="2px solid"
+            borderColor="rgba(0, 153, 153, 0.3)"
+            boxShadow="0 4px 20px rgba(0, 153, 153, 0.15), 0 0 40px rgba(0, 153, 153, 0.05)"
             mb={1}
-            placeholder="Enter function name"
-            value={functionName}
-            onChange={(event) => setFunctionName(event.target.value)}
-          />
+          >
+            <Input
+              height="4.3vh"
+              placeholder="Enter function name"
+              value={functionName}
+              onChange={(event) => setFunctionName(event.target.value)}
+              border="none"
+              _focus={{ border: "none", boxShadow: "none" }}
+            />
+          </Box>
           <div style={{display:"flex"}}>
             <div style={{flex: 1}}>
               <div className="label">
@@ -263,18 +291,28 @@ const CodeEditor = () => {
                   Test Cases Inputs :
                 </Text>
               </div>
-              <Textarea
-                height="20.6vh"
+              <Box
+                borderRadius="12px"
+                overflow="hidden"
+                border="2px solid"
+                borderColor="rgba(0, 153, 153, 0.3)"
+                boxShadow="0 4px 20px rgba(0, 153, 153, 0.15), 0 0 40px rgba(0, 153, 153, 0.05)"
                 mr={1}
-                value={testCasesInputs}
-                onChange={(event) => settestCasesIntputs(event.target.value)}
-                placeholder="{argument value 1 for test case1}
+              >
+                <Textarea
+                  height="20.6vh"
+                  value={testCasesInputs}
+                  onChange={(event) => settestCasesIntputs(event.target.value)}
+                  placeholder="{argument value 1 for test case1}
                 {argument value 2 for testcase 1}
                 {other arguments values for test case1}
                 ===delimiter is new empty line===
                 {argument value 1 of testcase 2}
                 ..."
-              />
+                  border="none"
+                  _focus={{ border: "none", boxShadow: "none" }}
+                />
+              </Box>
             </div>
             <div style={{flex: 1}}>
               <div className="label">
@@ -282,18 +320,28 @@ const CodeEditor = () => {
                   Test Cases Outputs :
                 </Text>
               </div>
-              <Textarea
-                height="20.6vh"
+              <Box
+                borderRadius="12px"
+                overflow="hidden"
+                border="2px solid"
+                borderColor="rgba(0, 153, 153, 0.3)"
+                boxShadow="0 4px 20px rgba(0, 153, 153, 0.15), 0 0 40px rgba(0, 153, 153, 0.05)"
                 ml={1}
-                value={testCasesOutputs}
-                onChange={(event) => settestCasesOutputs(event.target.value)}
-                placeholder="{return value 1 for test case1}
+              >
+                <Textarea
+                  height="20.6vh"
+                  value={testCasesOutputs}
+                  onChange={(event) => settestCasesOutputs(event.target.value)}
+                  placeholder="{return value 1 for test case1}
                 {return value 2 for testcase 1}
                 {other arguments values for test case1}
                 ===delimiter is new empty line===
                 {return value 1 of testcase 2}
                 ..."
-              />
+                  border="none"
+                  _focus={{ border: "none", boxShadow: "none" }}
+                />
+              </Box>
             </div>
           </div>
           </div>}

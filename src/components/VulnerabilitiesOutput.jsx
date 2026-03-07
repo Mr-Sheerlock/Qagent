@@ -117,9 +117,10 @@ const VulnerabilitiesOutput = ({ editorRef }) => {
             height="75vh"
             p={2}
             color={isError ? "red.400" : ""}
-            border="1px solid"
-            borderRadius={4}
-            borderColor={isError ? "red.500" : "#333"}
+            border="2px solid"
+            borderRadius="16px"
+            borderColor={isError ? "red.500" : "rgba(255, 152, 0, 0.3)"}
+            boxShadow="0 4px 20px rgba(255, 152, 0, 0.15), 0 0 40px rgba(255, 152, 0, 0.05)"
             overflow="auto"
         >
             {output

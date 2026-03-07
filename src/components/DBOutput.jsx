@@ -198,7 +198,6 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
                 </div>
             </div>
         </div>
-        <div className="labelButtonWrapper">
         <div className="label">
                 <Text 
                     mb={1} 
@@ -218,21 +217,27 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
                   Similar Code
                 </Text>
           </div>
-          </div>
-        <Editor
-            options={{
-              minimap: {
-                enabled: false,
-              },
-            }}
-            height= "30vh"
-            theme="vs-dark"
-            language={language}
-            onMount={onMount}
-            value={SimilarCodeOutput}
-            onChange={(SimilarCodeOutput) => setSimilarCodeOutput(SimilarCodeOutput)}
-          />
-          <div className="labelButtonWrapper">
+        <Box
+          borderRadius="16px"
+          overflow="hidden"
+          border="2px solid"
+          borderColor="rgba(6, 182, 212, 0.3)"
+          boxShadow="0 4px 20px rgba(6, 182, 212, 0.15), 0 0 40px rgba(6, 182, 212, 0.05)"
+        >
+          <Editor
+              options={{
+                minimap: {
+                  enabled: false,
+                },
+              }}
+              height= "30vh"
+              theme="vs-dark"
+              language={language}
+              onMount={onMount}
+              value={SimilarCodeOutput}
+              onChange={(SimilarCodeOutput) => setSimilarCodeOutput(SimilarCodeOutput)}
+            />
+        </Box>
           <div className="label">
                 <Text 
                     mb={1} 
@@ -252,20 +257,27 @@ const DBOutput = ({ editorRef,language, thresholSameLang, thresholDiffLang }) =>
                   Unit Tests
                 </Text>
           </div>
-          </div>
-          <Editor
-            options={{
-              minimap: {
-                enabled: false,
-              },
-            }}
-            height= "35.5vh"
-            theme="vs-dark"
-            language={language}
-            onMount={onMount}
-            value={UnitTestOutput}
-            onChange={(UnitTestOutput) => setUnitTestOutput(UnitTestOutput)}
-          />
+          <Box
+            borderRadius="16px"
+            overflow="hidden"
+            border="2px solid"
+            borderColor="rgba(251, 191, 36, 0.3)"
+            boxShadow="0 4px 20px rgba(251, 191, 36, 0.15), 0 0 40px rgba(251, 191, 36, 0.05)"
+          >
+            <Editor
+              options={{
+                minimap: {
+                  enabled: false,
+                },
+              }}
+              height= "35.5vh"
+              theme="vs-dark"
+              language={language}
+              onMount={onMount}
+              value={UnitTestOutput}
+              onChange={(UnitTestOutput) => setUnitTestOutput(UnitTestOutput)}
+            />
+          </Box>
     </div>
   );
 };

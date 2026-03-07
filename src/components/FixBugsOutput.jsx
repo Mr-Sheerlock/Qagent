@@ -164,19 +164,27 @@ const FixBugsOutput = ({ editorRef,language, functionName, testCasesInputs, test
                 </div>
             </div>
         </div>
-        <Editor
-            options={{
-              minimap: {
-                enabled: false,
-              },
-            }}
-            height= "75vh"
-            theme="vs-dark"
-            language={language}
-            onMount={onMount}
-            value={UnitTestOutput}
-            onChange={(UnitTestOutput) => setUnitTestOutput(UnitTestOutput)}
-          />
+        <Box
+          borderRadius="16px"
+          overflow="hidden"
+          border="2px solid"
+          borderColor="rgba(255, 152, 0, 0.3)"
+          boxShadow="0 4px 20px rgba(255, 152, 0, 0.15), 0 0 40px rgba(255, 152, 0, 0.05)"
+        >
+          <Editor
+              options={{
+                minimap: {
+                  enabled: false,
+                },
+              }}
+              height= "75vh"
+              theme="vs-dark"
+              language={language}
+              onMount={onMount}
+              value={UnitTestOutput}
+              onChange={(UnitTestOutput) => setUnitTestOutput(UnitTestOutput)}
+            />
+        </Box>
       </div>
   );
 };
