@@ -58,7 +58,15 @@ const CodeEditor = () => {
           <div className="buttons">
             <div className="labelButtonWrapper">
               <div className="label">
-                <Text mb={2} mt={2} fontSize="lg">
+                <Text 
+                  mb={2} 
+                  mt={2} 
+                  fontSize="md" 
+                  fontWeight="700"
+                  bgGradient="linear(to-r, #008888, #00aaaa)"
+                  bgClip="text"
+                  letterSpacing="wide"
+                >
                   Task
                 </Text>
               </div>
@@ -189,7 +197,15 @@ const CodeEditor = () => {
             }
             <div className="labelButtonWrapper">
               <div className="label">
-                <Text mb={2} mt={2} fontSize="lg">
+                <Text 
+                  mb={2} 
+                  mt={2} 
+                  fontSize="md" 
+                  fontWeight="700"
+                  bgGradient="linear(to-r, #008888, #00aaaa)"
+                  bgClip="text"
+                  letterSpacing="wide"
+                >
                   Language
                 </Text>
               </div>
